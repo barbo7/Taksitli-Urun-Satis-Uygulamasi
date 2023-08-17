@@ -1,0 +1,12 @@
+﻿#form1 {
+    margin-top: 50px; /* Yukarıdan 50 piksel boşluk */
+    /* veya padding-top: 20px; */
+    text-align: center; /* Form içeriğini ortalamak için */
+    /* Diğer stil özellikleri */
+}
+
+.right-aligned-button {
+    display: block;
+    float: right;
+    /* Diğer stil özellikleri */
+}
