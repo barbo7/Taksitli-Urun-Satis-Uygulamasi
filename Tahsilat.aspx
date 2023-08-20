@@ -1,21 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Tahsilat.aspx.cs" Inherits="TahsilatUyg_.Tahsilat" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.Master" CodeBehind="Tahsilat.aspx.cs" Inherits="TahsilatUyg_.Tahsilat" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <link href="Css/StyleSheet1.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  CausesValidation="false"  Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
             <br />
             <br />
             <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Tahsilat Takip"></asp:Label>
-        &nbsp;</div>
+        &nbsp;
         <p>
             <asp:Label ID="Label2" runat="server" Text="Müşteri Adı*"></asp:Label>
         </p>
@@ -61,6 +52,4 @@
         &nbsp;&nbsp;
         <asp:Button ID="Button1" AutoPostBack="true" runat="server" Text="Kaydet" OnClick="Button1_Click" />
         <br />
-    </form>
-</body>
-</html>
+</asp:Content>

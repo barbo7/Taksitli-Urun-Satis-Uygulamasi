@@ -15,14 +15,14 @@ namespace TahsilatUyg_
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            RequiredFieldValidator1.ControlToValidate = TextBox2.ClientID;
+            RequiredFieldValidator1.ControlToValidate = TextBox2.ID;
             RequiredFieldValidator1.InitialValue = "";
-            RequiredFieldValidator2.ControlToValidate = TextBox3.ClientID;
+            RequiredFieldValidator2.ControlToValidate = TextBox3.ID;
             RequiredFieldValidator2.InitialValue = "";
 
-            RegularExpressionValidator1.ControlToValidate = TextBox2.ClientID;
+            RegularExpressionValidator1.ControlToValidate = TextBox2.ID;
             RegularExpressionValidator1.ValidationExpression = @"^\d+$";
-            RegularExpressionValidator2.ControlToValidate = TextBox3.ClientID;
+            RegularExpressionValidator2.ControlToValidate = TextBox3.ID;
             RegularExpressionValidator2.ValidationExpression = @"^\d+(\.\d+)?$";
         }
 

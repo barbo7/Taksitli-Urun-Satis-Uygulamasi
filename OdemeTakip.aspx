@@ -1,23 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OdemeTakip.aspx.cs" Inherits="TahsilatUyg_.OdemeTakip" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.Master" CodeBehind="OdemeTakip.aspx.cs" Inherits="TahsilatUyg_.OdemeTakip" %>
 
-<!DOCTYPE html>
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <link href="Css/StyleSheet1.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  CausesValidation="false"  Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
             <br />
             <br />
             <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Ödeme Takip"></asp:Label>
             <br />
             <br />
-        </div>
         <asp:Label ID="Label2" runat="server" Text="Müşteri Arama"></asp:Label>
         <br />
         <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
@@ -50,6 +40,4 @@
             <SortedDescendingCellStyle BackColor="#FFFDF8" />
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
-    </form>
-</body>
-</html>
+</asp:Content>

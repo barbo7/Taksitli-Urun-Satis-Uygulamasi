@@ -14,15 +14,15 @@ namespace TahsilatUyg_
         VeriTabani vt = new VeriTabani();
         protected void Page_Load(object sender, EventArgs e)
         {
-            RangeValidator1.ControlToValidate = TextBox3.ClientID;
+            RangeValidator1.ControlToValidate = TextBox3.ID;
             RangeValidator1.Type = ValidationDataType.Integer;
             RangeValidator1.MinimumValue = "1";
             RangeValidator1.MaximumValue = "36";
-            RequiredFieldValidator1.ControlToValidate = TextBox3.ClientID;
+            RequiredFieldValidator1.ControlToValidate = TextBox3.ID;
             RequiredFieldValidator1.InitialValue = "";
-            RegularExpressionValidator1.ControlToValidate = TextBox2.ClientID;
+            RegularExpressionValidator1.ControlToValidate = TextBox2.ID;
             RegularExpressionValidator1.ValidationExpression = @"^\d+(\.\d+)?$";
-            RequiredFieldValidator2.ControlToValidate = TextBox2.ClientID;
+            RequiredFieldValidator2.ControlToValidate = TextBox2.ID;
             RequiredFieldValidator2.InitialValue = "";
 
             vt.MusteriAd(DropDownList2);

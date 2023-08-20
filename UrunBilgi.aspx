@@ -1,16 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UrunBilgi.aspx.cs" Inherits="TahsilatUyg_.UrunBilgi" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.Master" CodeBehind="UrunBilgi.aspx.cs" Inherits="TahsilatUyg_.UrunBilgi" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <link href="Css/StyleSheet1.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  CausesValidation="false"  Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
             <br />
             <br />
@@ -35,7 +25,6 @@
                     <SortedDescendingHeaderStyle BackColor="#575357" />
                 </asp:GridView>
             </p>
-        </div>
         <p>
             <asp:Label ID="Label2" runat="server" Text="Ürün adı*:"></asp:Label>
         </p>
@@ -62,6 +51,4 @@
 &nbsp;&nbsp;&nbsp;
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Ürün Kaydet" />
         </p>
-    </form>
-</body>
-</html>
+</asp:Content>

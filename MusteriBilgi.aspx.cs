@@ -13,24 +13,24 @@ namespace TahsilatUyg_
            
             if (!IsPostBack)
             {
-                RequiredFieldValidator1.ControlToValidate = TextBox1.ClientID;
+                RequiredFieldValidator1.ControlToValidate = TextBox1.ID;
                 RequiredFieldValidator1.InitialValue = "";
                 RequiredFieldValidator1.Text = "Ad-Soyad alanı Boş bırakılamaz.";
-                RegularExpressionValidator1.ControlToValidate = TextBox1.ClientID;
+                RegularExpressionValidator1.ControlToValidate = TextBox1.ID;
                 RegularExpressionValidator1.ValidationExpression = @"^[\wçğıöşüÇĞİÖŞÜ]+( [\wçğıöşüÇĞİÖŞÜ]+){1,2}$";
                 RegularExpressionValidator1.Text = "Lütfen sadece harf kullanın.";
 
-                RequiredFieldValidator2.ControlToValidate = TextBox2.ClientID;
+                RequiredFieldValidator2.ControlToValidate = TextBox2.ID;
                 RequiredFieldValidator2.InitialValue = "";
                 RequiredFieldValidator2.Text = "Tc No alanı Boş bırakılamaz.";
-                RegularExpressionValidator2.ControlToValidate = TextBox2.ClientID;
+                RegularExpressionValidator2.ControlToValidate = TextBox2.ID;
                 RegularExpressionValidator2.ValidationExpression = @"^\d{11}$";
                 RegularExpressionValidator2.Text = "11 Haneli TC giriniz.";
 
-                RequiredFieldValidator3.ControlToValidate = TextBox3.ClientID;
+                RequiredFieldValidator3.ControlToValidate = TextBox3.ID;
                 RequiredFieldValidator3.InitialValue = "";
                 RequiredFieldValidator3.Text = "Cep telefonu alanı Boş bırakılamaz.";
-                RegularExpressionValidator3.ControlToValidate = TextBox3.ClientID;
+                RegularExpressionValidator3.ControlToValidate = TextBox3.ID;
                 RegularExpressionValidator3.ValidationExpression = @"^\d{11}$";
                 RegularExpressionValidator3.Text = "11 Haneli Telefon numarasını giriniz.";
             }

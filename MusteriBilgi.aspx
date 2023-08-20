@@ -1,23 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MusteriBilgi.aspx.cs" Inherits="TahsilatUyg_.MusteriBilgi" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.Master" CodeBehind="MusteriBilgi.aspx.cs" Inherits="TahsilatUyg_.MusteriBilgi" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
-    <script src="Scripts/jquery-3.7.0.js"></script>
-    <link href="Css/StyleSheet1.css" rel="stylesheet" />
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  CausesValidation="false"  Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
             <br />
             <br />
             <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Müşteri Girişi"></asp:Label>
             <br />
-        </div>
         <p>
             <asp:Label ID="Label2" runat="server" Text="Ad Soyad*:"></asp:Label>
         </p>
@@ -69,6 +57,4 @@
         <p style="margin-left: 120px">
             <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Kaydet" />
         </p>
-    </form>
-</body>
-</html>
+ </asp:Content>

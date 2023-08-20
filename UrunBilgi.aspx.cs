@@ -14,15 +14,15 @@ namespace TahsilatUyg_
         {
             if (!IsPostBack)
             {
-                RequiredFieldValidator1.ControlToValidate = TextBox1.ClientID;
+                RequiredFieldValidator1.ControlToValidate = TextBox1.ID;
                 RequiredFieldValidator1.InitialValue = "";
-                RequiredFieldValidator2.ControlToValidate = TextBox2.ClientID;
+                RequiredFieldValidator2.ControlToValidate = TextBox2.ID;
                 RequiredFieldValidator2.InitialValue = "";
 
-                RegularExpressionValidator1.ControlToValidate = TextBox1.ClientID;
+                RegularExpressionValidator1.ControlToValidate = TextBox1.ID;
                 RegularExpressionValidator1.ValidationExpression = @"^[\wçğıöşüÇĞİÖŞÜ]+( [\wçğıöşüÇĞİÖŞÜ]+)?$";
 
-                RegularExpressionValidator2.ControlToValidate = TextBox2.ClientID;
+                RegularExpressionValidator2.ControlToValidate = TextBox2.ID;
                 RegularExpressionValidator2.ValidationExpression = @"^\d+(\.\d*)?$";
                 RegularExpressionValidator2.Text = "Geçerli Ürün Fiyatı Giriniz";
 
