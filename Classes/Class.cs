@@ -17,16 +17,24 @@ namespace TahsilatUyg_.Classes
     {
         string connectionStringGenel = System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringGenel"].ConnectionString;
 
-        public void UrunB(GridView gv)
+        public string UrunB()
         {
+            StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT urun_ad as 'Ürün Adı',fiyat as 'Fiyat' FROM[TBL_URUNLER]", con);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            gv.DataSource = dt;
-            gv.DataBind();
+            SqlCommand cmd = new SqlCommand("SELECT urun_ad as 'Ürün Adı',fiyat as 'Fiyat' FROM[TBL_URUNLER]", con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while(dr.Read())
+            {
+                htmlBuilder.Append("<tr>");
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Ürün Adı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Fiyat"].ToString());
+                htmlBuilder.Append("</tr>");
+            }
+            dr.Close();
             con.Close();
+
+            return htmlBuilder.ToString();
         }
 
         public void MusteriAd(DropDownList ddl)
@@ -107,22 +115,48 @@ namespace TahsilatUyg_.Classes
 
             return htmlBuilder.ToString();
         }
-        public void AdVeyaIdGoreListeleOT(string veri, GridView gridV, GridView gridV2)
+
+        public string AdVeyaIdGoreListeleOT2(string veri)
         {
+            StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi' FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like '" + veri + "%' OR musteri_id like'" + veri + "')", con);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            SqlDataAdapter da2 = new SqlDataAdapter("SELECT [ad_soyad] 'Ad Soyad',[urun_ad] 'Satılan Ürün Adı',[odenen_miktar] 'Ödenen Tutar',[tarih] 'Tarih' FROM SATIS_TUTANAGI WHERE musteri_id like '"+veri+"%' or ad_soyad like '"+veri+"%'", con);
-            DataTable dt2 = new DataTable();
-            da2.Fill(dt2);
+            SqlCommand cmd2 = new SqlCommand("SELECT [ad_soyad] 'Ad Soyad',[urun_ad] 'Satılan Ürün Adı',[odenen_miktar] 'Ödenen Tutar',[tarih] 'Tarih' FROM SATIS_TUTANAGI WHERE musteri_id like '" + veri + "%' or ad_soyad like '" + veri + "%'", con);
+            SqlDataReader dr2 = cmd2.ExecuteReader();
+            while (dr2.Read())
+            {
+                htmlBuilder.Append("<tr>");
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Ad Soyad"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Satılan Ürün Adı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Ödenen Tutar"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Tarih"].ToString());
+                htmlBuilder.Append("</tr>");
+            }
+            dr2.Close();
             con.Close();
+            return htmlBuilder.ToString();
+        }
+        public string AdVeyaIdGoreListeleOT1(string veri)
+        {
+            StringBuilder htmlBuilder = new StringBuilder();
+            SqlConnection con = new SqlConnection(connectionStringGenel);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi' FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like '" + veri + "%' OR musteri_id like'" + veri + "')", con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while(dr.Read())
+            {
+                htmlBuilder.Append("<tr>");
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Ad Soyad"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Ürün Adı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Taksit Miktarı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Toplam Fiyat"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Toplam Ödenen"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Ödeme Başlangıç Tarihi"].ToString());
+                htmlBuilder.Append("</tr>");
 
-            gridV.DataSource = dt;
-            gridV.DataBind();
-            gridV2.DataSource = dt2;
-            gridV2.DataBind();
+            }
+            dr.Close();
+            return htmlBuilder.ToString();
         }
     }
 }

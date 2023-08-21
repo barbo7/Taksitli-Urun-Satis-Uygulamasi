@@ -31,7 +31,7 @@
         <asp:Label ID="Label3" runat="server" Text="Kefil Tel No*:"></asp:Label>
     </p>
     <p>
-        <asp:TextBox ID="TextBox2" runat="server" MaxLength="11" AutoPostBack="false"></asp:TextBox>
+        <asp:TextBox ID="TextBox2" runat="server" BorderWidth="1px" MaxLength="11" AutoPostBack="false"></asp:TextBox>
     </p>
     <p>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="TextBox2"
@@ -43,7 +43,7 @@
         <asp:Label ID="Label4" runat="server" Text="Kefil TC*:"></asp:Label>
     </p>
     <p>
-        <asp:TextBox ID="TextBox3" runat="server" MaxLength="11" AutoPostBack="false"></asp:TextBox>
+        <asp:TextBox ID="TextBox3" runat="server" BorderWidth="1px" MaxLength="11" AutoPostBack="false"></asp:TextBox>
     </p>
     <p>
         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox3"

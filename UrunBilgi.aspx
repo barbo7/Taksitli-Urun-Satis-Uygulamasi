@@ -1,5 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.Master" CodeBehind="UrunBilgi.aspx.cs" Inherits="TahsilatUyg_.UrunBilgi" %>
 
+<asp:Content ID="Content2" runat="server" ContentPlaceHolderID="head">
+    <style>
+    .auto-style1 {
+        width: 415px;
+    }
+</style>
+</asp:Content>
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
             <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  CausesValidation="false"  Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
             <br />
@@ -7,29 +14,29 @@
             <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Ürün Bilgileri"></asp:Label>
             <br />
             <p>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" Width="572px" HorizontalAlign="Center" BackColor="White" BorderColor="#DEDFDE" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Vertical">
-                    <AlternatingRowStyle BackColor="White" />
-                    <Columns>
-                        <asp:BoundField DataField="Ürün Adı" HeaderText="Ürün Adı" SortExpression="Ürün Adı" />
-                        <asp:BoundField DataField="Fiyat" HeaderText="Fiyat" SortExpression="Fiyat" />
-                    </Columns>
-                    <FooterStyle BackColor="#CCCC99" />
-                    <HeaderStyle BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
-                    <RowStyle BackColor="#F7F7DE" />
-                    <SelectedRowStyle BackColor="#CE5D5A" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#FBFBF2" />
-                    <SortedAscendingHeaderStyle BackColor="#848384" />
-                    <SortedDescendingCellStyle BackColor="#EAEAD3" />
-                    <SortedDescendingHeaderStyle BackColor="#575357" />
-                </asp:GridView>
-            </p>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+  <!-- DATA TABLE -->
+            <div class="table-responsive m-b-40" style="height: 200px">
+                <table class="table table-borderless table-data3">
+                    <thead>
+                        <tr>
+                            <th class="auto-style1">Ürün Adı</th>
+                            <th>Ürün Fiyatı</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td colspan="6">
+                            <asp:Literal ID="Literal1" runat="server">
+                            </asp:Literal>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         <p>
             <asp:Label ID="Label2" runat="server" Text="Ürün adı*:"></asp:Label>
         </p>
         <p>
-            <asp:TextBox ID="TextBox1" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+            <asp:TextBox ID="TextBox1" BorderWidth="1px" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
             </p>
         <p>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1"
@@ -40,7 +47,7 @@
             <asp:Label ID="Label3" runat="server" Text="Ürün Fiyatı*:"></asp:Label>
         </p>
         <p>
-            <asp:TextBox ID="TextBox2" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Number"></asp:TextBox>
+            <asp:TextBox ID="TextBox2" BorderWidth="1px" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Number"></asp:TextBox>
         </p>
         <p>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox1"

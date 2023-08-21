@@ -51,21 +51,21 @@ namespace TahsilatUyg_
         protected global::System.Web.UI.WebControls.TextBox TextBox1;
 
         /// <summary>
-        /// GridView1 denetimi.
+        /// Literal1 denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik olarak oluşturulan alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView1;
+        protected global::System.Web.UI.WebControls.Literal Literal1;
 
         /// <summary>
-        /// GridView2 denetimi.
+        /// Literal2 denetimi.
         /// </summary>
         /// <remarks>
         /// Otomatik olarak oluşturulan alan.
         /// Değiştirmek için, alan bildirimini tasarımcı dosyasından arka plan kod dosyasına taşıyın.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridView2;
+        protected global::System.Web.UI.WebControls.Literal Literal2;
     }
 }

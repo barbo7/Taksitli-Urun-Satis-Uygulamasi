@@ -10,6 +10,8 @@ namespace TahsilatUyg_
 {
     public partial class UrunBilgi : System.Web.UI.Page
     {
+        VeriTabani vt = new VeriTabani();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -26,11 +28,10 @@ namespace TahsilatUyg_
                 RegularExpressionValidator2.ValidationExpression = @"^\d+(\.\d*)?$";
                 RegularExpressionValidator2.Text = "Geçerli Ürün Fiyatı Giriniz";
 
-                VeriTabani vt = new VeriTabani();
-                vt.UrunB(GridView1);
-
+                Literal1.Text = vt.UrunB();
             }
         }
+       
 
         protected void Button1_Click(object sender, EventArgs e)
         {
@@ -47,7 +48,8 @@ namespace TahsilatUyg_
                 cmd.ExecuteNonQuery();
                 con.Close();
                 Response.Write("İşlem başarıyla tamamlandı!");
-                GridView1.DataBind();
+
+                Literal1.Text = vt.UrunB();
                 TextBox1.Text = "";
                 TextBox2.Text = "";
             }
@@ -56,7 +58,6 @@ namespace TahsilatUyg_
         protected void Button2_Click(object sender, EventArgs e)
         {
             Response.Redirect("AnaSayfa.aspx");
-
 
         }
 

@@ -27,7 +27,9 @@ namespace TahsilatUyg_
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
-            Vt.AdVeyaIdGoreListeleOT(TextBox1.Text, GridView1,GridView2);
+            Literal1.Text =Vt.AdVeyaIdGoreListeleOT1(TextBox1.Text);
+            Literal2.Text = Vt.AdVeyaIdGoreListeleOT2(TextBox1.Text);
+
         }
     }
 }
