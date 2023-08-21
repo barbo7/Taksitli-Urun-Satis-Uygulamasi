@@ -42,8 +42,8 @@
         <thead>
             <tr>
                 <th>Müşteri Ad Soyad</th>
-                <th>Ürün Adı</th>
-                <th>Ödenen Tutar</th>
+                <th class="auto-style1">Ürün Adı</th>
+                <th class="auto-style2">Ödenen Tutar</th>
                 <th>Tarih</th>
             </tr>
         </thead>
@@ -57,4 +57,14 @@
     </table>
 </div>
         
+</asp:Content>
+<asp:Content ID="Content2" runat="server" contentplaceholderid="head">
+    <style type="text/css">
+        .auto-style1 {
+            width: 206px;
+        }
+        .auto-style2 {
+            width: 123px;
+        }
+    </style>
 </asp:Content>

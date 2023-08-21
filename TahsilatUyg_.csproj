@@ -71,7 +71,11 @@
     <Content Include="css\bootstrap-datetimepicker.min.css" />
     <Content Include="css\font-face.css" />
     <Content Include="css\StyleSheet1.css" />
+    <Content Include="css\Taksit.png" />
     <Content Include="css\theme.css" />
+    <Content Include="js\bootstrap-datetimepicker.js" />
+    <Content Include="js\main.js" />
+    <Content Include="js\moment.js" />
     <Content Include="KefilBilgi.aspx" />
     <Content Include="MusteriBilgi.aspx" />
     <Content Include="MusteriTakip.aspx" />

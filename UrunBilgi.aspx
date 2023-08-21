@@ -56,6 +56,6 @@
         </p>
         <p>
 &nbsp;&nbsp;&nbsp;
-            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Ürün Kaydet" />
+            <asp:Button ID="Button1" class="btn btn-success btn-rounded" runat="server" OnClick="Button1_Click" Text="Ürün Kaydet" />
         </p>
 </asp:Content>

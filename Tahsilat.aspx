@@ -50,6 +50,6 @@
         <asp:TextBox ID="TextBox6" BorderWidth="1px" runat="server" Height="67px" Width="184px" ></asp:TextBox>
         <br />
         &nbsp;&nbsp;
-        <asp:Button ID="Button1" AutoPostBack="true" runat="server" Text="Kaydet" OnClick="Button1_Click" />
+        <asp:Button ID="Button1" class="btn btn-success btn-rounded" AutoPostBack="true" runat="server" Text="Kaydet" OnClick="Button1_Click" />
         <br />
 </asp:Content>
