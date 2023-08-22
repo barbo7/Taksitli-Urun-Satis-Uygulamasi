@@ -33,6 +33,7 @@ namespace TahsilatUyg_
                 RegularExpressionValidator3.ControlToValidate = TextBox3.ID;
                 RegularExpressionValidator3.ValidationExpression = @"^\d{11}$";
                 RegularExpressionValidator3.Text = "11 Haneli Telefon numarasını giriniz.";
+
             }
 
         }
@@ -45,7 +46,7 @@ namespace TahsilatUyg_
             SqlCommand cmd = new SqlCommand(sqlC, con);
             cmd.ExecuteNonQuery();
             con.Close();
-            Response.Write("İşlem başarıyla tamamlandı!");
+            successAlert.Style["display"] = "block";
         }
 
         protected void TextBox4_TextChanged(object sender, EventArgs e)

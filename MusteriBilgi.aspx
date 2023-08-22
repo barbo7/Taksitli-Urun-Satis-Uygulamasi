@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/MasterPage.Master" CodeBehind="MusteriBilgi.aspx.cs" Inherits="TahsilatUyg_.MusteriBilgi" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-            <asp:Button ID="Button2" runat="server" OnClick="Button2_Click"  CausesValidation="false"  Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
             <br />
             <br />
             <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Müşteri Girişi"></asp:Label>
@@ -59,4 +58,17 @@
             <p>
                 &nbsp;<asp:Button ID="Button1" class="btn btn-success btn-rounded" runat="server" OnClick="Button1_Click" Text="Kaydet" />
         </p>
+            <p>
+                &nbsp;</p>
+            <div class="sufee-alert alert with-close alert-success alert-dismissible fade show" runat="server" id="successAlert" style="display: none;">
+		        <span class="badge badge-pill badge-success">Başarılı!</span>
+		        Kayıt gerçekleştirildi.
+		        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			        <span aria-hidden="true">&times;</span>
+		        </button>
+	        </div>
+            <p>
+                &nbsp;</p>
+
+
  </asp:Content>

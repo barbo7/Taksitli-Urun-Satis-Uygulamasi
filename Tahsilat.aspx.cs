@@ -14,19 +14,22 @@ namespace TahsilatUyg_
         VeriTabani vt = new VeriTabani();
         protected void Page_Load(object sender, EventArgs e)
         {
-            RangeValidator1.ControlToValidate = TextBox3.ID;
-            RangeValidator1.Type = ValidationDataType.Integer;
-            RangeValidator1.MinimumValue = "1";
-            RangeValidator1.MaximumValue = "36";
-            RequiredFieldValidator1.ControlToValidate = TextBox3.ID;
-            RequiredFieldValidator1.InitialValue = "";
-            RegularExpressionValidator1.ControlToValidate = TextBox2.ID;
-            RegularExpressionValidator1.ValidationExpression = @"^\d+(\.\d+)?$";
-            RequiredFieldValidator2.ControlToValidate = TextBox2.ID;
-            RequiredFieldValidator2.InitialValue = "";
+            if (!IsPostBack)
+            {
+                RangeValidator1.ControlToValidate = TextBox3.ID;
+                RangeValidator1.Type = ValidationDataType.Integer;
+                RangeValidator1.MinimumValue = "1";
+                RangeValidator1.MaximumValue = "36";
+                RequiredFieldValidator1.ControlToValidate = TextBox3.ID;
+                RequiredFieldValidator1.InitialValue = "";
+                RegularExpressionValidator1.ControlToValidate = TextBox2.ID;
+                RegularExpressionValidator1.ValidationExpression = @"^\d+(\.\d+)?$";
+                RequiredFieldValidator2.ControlToValidate = TextBox2.ID;
+                RequiredFieldValidator2.InitialValue = "";
 
-            vt.MusteriAd(DropDownList2);
-            vt.UrunAdi(DropDownList1);
+                vt.MusteriAd(DropDownList2);
+                vt.UrunAdi(DropDownList1);
+            }
         }
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,7 +38,7 @@ namespace TahsilatUyg_
                 SqlConnection con = new SqlConnection(connectionStringGenel);
                 con.Open();
                 SqlCommand cmd = new SqlCommand("SELECT fiyat FROM TBL_URUNLER WHERE urun_id=" + DropDownList1.SelectedValue, con);
-                TextBox2.Text = cmd.ExecuteScalar()?.ToString(); // Null değer olma ihtimaline karşı ?. kullanımı
+                TextBox2.Text = cmd.ExecuteScalar().ToString(); // Null değer olma ihtimaline karşı ?. kullanımı
                 con.Close();
             }
         //textBox2 = Ürün fiyatı, textBox3 = taksit miktarı, textBox4 = peşin alınan miktar, textBox5 = Aylık ödenecek Taksit tutarı
