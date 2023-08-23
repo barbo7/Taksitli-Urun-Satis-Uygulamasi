@@ -41,7 +41,8 @@ namespace TahsilatUyg_
             SqlCommand cmdcontrol = new SqlCommand("SELECT Count(*) FROM TBL_URUNLER WHERE urun_ad='"+TextBox1.Text+"'",con);
             int urunAdControl = (int)cmdcontrol.ExecuteScalar();
             if(urunAdControl>0)
-                Response.Write("Aynı isimde ürün var. Kayıt Yapılmadı!");
+                unsuccessAlert.Style["display"] = "block";
+
             else
             {
                 SqlCommand cmd = new SqlCommand("INSERT INTO TBL_URUNLER(urun_ad,fiyat) VALUES('" + TextBox1.Text + "'," + double.Parse(TextBox2.Text) + ")", con);

@@ -61,7 +61,7 @@ namespace TahsilatUyg_
         {
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
-            if(DropDownList2.SelectedValue !="1" && DropDownList1.SelectedValue != "1")
+            if (DropDownList2.SelectedValue != "1" && DropDownList1.SelectedValue != "1")
             {
                 string verigonder = String.Format("INSERT INTO TBL_TAKSITLER(musteri_id, urun_id, toplam_fiyat, kac_taksit, odenen, kalan, musteri_not) VALUES({0}, {1}, {2}, {3}, {4}, {5}, '{6}')",
          DropDownList2.SelectedValue, DropDownList1.SelectedValue, TextBox2.Text, TextBox3.Text, TextBox4.Text, TextBox5.Text, TextBox6.Text);
@@ -81,7 +81,7 @@ namespace TahsilatUyg_
                 TextBox6.Text = "";
             }
             else
-                Response.Write("Ürün adı ve müşteri adı boş bırakılamaz!");
+                unsuccessAlert.Style["display"] = "block";
 
         }
 

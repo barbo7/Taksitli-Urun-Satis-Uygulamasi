@@ -67,6 +67,14 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+
+        <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show" runat="server" id="unsuccessAlert" style="display: none;">
+        <span class="badge badge-pill badge-danger">Başarısız!</span>
+        Aynı isimde ürün var. Kayıt Yapılmadı!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
         <p>
             &nbsp;</p>
 </asp:Content>
