@@ -55,9 +55,5 @@ namespace TahsilatUyg_
             TextBox4.Text =TextBox4.Text.Substring(0, 10); 
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AnaSayfa.aspx");
-        }
     }
 }

@@ -32,12 +32,6 @@ namespace TahsilatUyg_
             string tabloVeri =Vt.AdVeyaIdGoreTable(TextBox1.Text);
             myLiteralControl.Text = tabloVeri;
         }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AnaSayfa.aspx");
-        }
-
         protected void Button3_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection(connectionStringGenel);

@@ -42,36 +42,27 @@
                     <div class="noti-wrap">
                         <div class="noti__item js-item-menu">
                             <i class="zmdi zmdi-notifications"></i>
-                            <span class="quantity">3</span>
+                            <span class="quantity">1</span>
                             <div class="notifi-dropdown js-dropdown">
                                 <div class="notifi__title">
-                                    <p>You have 3 Notifications</p>
+                                    <p>1 Yeni Bildirim</p>
                                 </div>
-                                <div class="notifi__item">
+                               <%-- <div class="notifi__item">
                                     <div class="bg-c1 img-cir img-40">
                                         <i class="zmdi zmdi-email-open"></i>
                                     </div>
                                     <div class="content">
-                                        <p>You got a email notification</p>
-                                        <span class="date">April 12, 2018 06:50</span>
+                                        <p>Ödeme alındı</p>
+                                        <span class="date">Aug 12, 2023 12:50</span>
                                     </div>
-                                </div>
-                                <div class="notifi__item">
-                                    <div class="bg-c2 img-cir img-40">
-                                        <i class="zmdi zmdi-account-box"></i>
-                                    </div>
-                                    <div class="content">
-                                        <p>Your account has been blocked</p>
-                                        <span class="date">April 12, 2018 06:50</span>
-                                    </div>
-                                </div>
+                                </div>--%>
                                 <div class="notifi__item">
                                     <div class="bg-c3 img-cir img-40">
                                         <i class="zmdi zmdi-file-text"></i>
                                     </div>
                                     <div class="content">
-                                        <p>You got a new file</p>
-                                        <span class="date">April 12, 2018 06:50</span>
+                                        <p>Ödeme alındı</p>
+                                        <span class="date">Aug 12, 2023 12:50</span>
                                     </div>
                                 </div>
                                 <div class="notifi__footer">
@@ -83,32 +74,24 @@
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="content">
-                                <a class="js-acc-btn" href="#">john doe</a>
+                                <a class="js-acc-btn" href="#">Bora Sapancılar</a>
                             </div>
                             <div class="account-dropdown js-dropdown">
                                 <div class="content">
                                     <h5 class="name">
-                                        <a href="#">john doe</a>
+                                        <a href="#">Bora</a>
                                     </h5>
-                                    <span class="email">johndoe@example.com</span>
+                                    <span class="email">barbo7@example.com</span>
                                 </div>
                                 <div class="account-dropdown__body">
                                     <div class="account-dropdown__item">
                                         <a href="#">
-                                            <i class="zmdi zmdi-account"></i>Account</a>
-                                    </div>
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-settings"></i>Setting</a>
-                                    </div>
-                                    <div class="account-dropdown__item">
-                                        <a href="#">
-                                            <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                            <i class="zmdi zmdi-account"></i>Hesap</a>
                                     </div>
                                 </div>
                                 <div class="account-dropdown__footer">
                                     <a href="#">
-                                        <i class="zmdi zmdi-power"></i>Logout</a>
+                                        <i class="zmdi zmdi-power"></i>Çıkış</a>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +104,7 @@
 <!-- END HEADER DESKTOP-->
 
 
-            <!-- HEADER MOBILE-->
+          <%--  <!-- HEADER MOBILE-->
     <header class="header-mobile d-block d-lg-none">
       <div class="header-mobile__bar">
         <div class="container-fluid">
@@ -236,7 +219,7 @@
         </div>
       </nav>
     </header>
-    <!-- END HEADER MOBILE-->
+    <!-- END HEADER MOBILE-->--%>
 
     <!-- MENU SIDEBAR-->
 <aside class="menu-sidebar d-none d-lg-block">

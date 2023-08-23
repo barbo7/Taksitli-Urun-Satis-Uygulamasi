@@ -57,12 +57,6 @@ namespace TahsilatUyg_
             }
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AnaSayfa.aspx");
-
-        }
-
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
           

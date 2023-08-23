@@ -84,10 +84,5 @@ namespace TahsilatUyg_
                 unsuccessAlert.Style["display"] = "block";
 
         }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("AnaSayfa.aspx");
-        }
     }
 }

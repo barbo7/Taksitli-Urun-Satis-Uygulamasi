@@ -9,7 +9,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
-    <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" CausesValidation="false" Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
     <br />
     <br />
 

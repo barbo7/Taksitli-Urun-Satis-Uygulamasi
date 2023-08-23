@@ -5,7 +5,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" CausesValidation="false" Text="Ana Sayfaya Dön" CssClass="right-aligned-button" />
     <br />
     <br />
     <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Kefil Kişi Bilgi Girişi"></asp:Label>
