@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
@@ -17,6 +18,34 @@ namespace TahsilatUyg_.Classes
     {
         string connectionStringGenel = System.Configuration.ConfigurationManager.ConnectionStrings["connectionStringGenel"].ConnectionString;
 
+        public int[] AnaSayfa()
+        {
+            int[] bilgiler = new int[2];
+            SqlConnection con = new SqlConnection(connectionStringGenel);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("Select Count(*) FROM TBL_URUNLER", con);
+            bilgiler[0] = (int)cmd.ExecuteScalar();
+            SqlCommand cmd2 = new SqlCommand("Select Count(Distinct(musteri_id)) FROM TBL_TAKSITLER ", con);
+            bilgiler[1] = (int)cmd2.ExecuteScalar();
+            con.Close();
+
+            return bilgiler;
+        }
+        public Dictionary<string,int> AnaSayfaChart()
+        {
+            Dictionary<string, int> chart = new Dictionary<string, int>();
+           SqlConnection con = new SqlConnection(connectionStringGenel);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT dbo.TBL_URUNLER.urun_ad,  Count(dbo.TBL_TAKSITLER.urun_id) AS 'Taksitlendirilmiş Ürün Sayısı'\r\nFROM dbo.TBL_TAKSITLER\r\nINNER JOIN dbo.TBL_URUNLER ON dbo.TBL_TAKSITLER.urun_id = dbo.TBL_URUNLER.urun_id\r\nGROUP BY dbo.TBL_URUNLER.urun_id, dbo.TBL_URUNLER.urun_ad\r\n", con);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while(dr.Read())
+            {
+                chart.Add(dr[0].ToString(), int.Parse(dr[1].ToString()));
+            }
+            dr.Close();
+            con.Close();
+            return chart;
+        }
         public string UrunB()
         {
             StringBuilder htmlBuilder = new StringBuilder();
