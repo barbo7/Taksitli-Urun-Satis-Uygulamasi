@@ -55,7 +55,7 @@ namespace TahsilatUyg_
                     reader.Close();
                     SqlCommand cmd = new SqlCommand("Update TBL_TAKSITLER SET odenen =" + odenen + " WHERE musteri_id =" + TextBox2.Text + " AND taksit_id=" + DropDownList1.SelectedValue, con);
                     cmd.ExecuteNonQuery();
-                    Response.Write("İşlem başarıyla tamamlandı!");
+                    successAlert.Style["display"] = "block";
                     myLiteralControl.Text = "";
                     Literal2.Text = "";
                     TextBox1.Text = "";

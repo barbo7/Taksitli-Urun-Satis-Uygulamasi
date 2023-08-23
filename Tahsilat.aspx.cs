@@ -71,7 +71,8 @@ namespace TahsilatUyg_
                 SqlCommand cmd2 = new SqlCommand("UPDATE TBL_TAKSIT_TARIH SET taksit_tutar=" + TextBox5.Text + " WHERE taksit_id in(SELECT taksit_id FROM TBL_TAKSITLER t WHERE t.musteri_id=" + DropDownList2.SelectedValue + " and t.urun_id=" + DropDownList1.SelectedValue + ") and eklenme_tarihi='" + DateTime.Now.ToString("yyyy-MM-dd") + "'", con);
                 cmd2.ExecuteNonQuery();
                 con.Close();
-                Response.Write("İşlem başarıyla tamamlandı!");
+                successAlert.Style["display"] = "block";
+
 
                 TextBox2.Text = "";
                 TextBox3.Text = "";

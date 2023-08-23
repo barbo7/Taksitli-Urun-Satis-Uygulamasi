@@ -52,4 +52,13 @@
         &nbsp;&nbsp;
         <asp:Button ID="Button1" class="btn btn-success btn-rounded" AutoPostBack="true" runat="server" Text="Kaydet" OnClick="Button1_Click" />
         <br />
+    <div class="sufee-alert alert with-close alert-success alert-dismissible fade show" runat="server" id="successAlert" style="display: none;">
+    <span class="badge badge-pill badge-success">Başarılı!</span>
+    Taksit Bilgileri Oluşturuldu.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<p>
+    &nbsp;</p>
 </asp:Content>

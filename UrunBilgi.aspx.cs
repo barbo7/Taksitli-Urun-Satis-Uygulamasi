@@ -52,6 +52,7 @@ namespace TahsilatUyg_
                 Literal1.Text = vt.UrunB();
                 TextBox1.Text = "";
                 TextBox2.Text = "";
+                successAlert.Style["display"] = "block";
             }
         }
 

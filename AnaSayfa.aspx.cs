@@ -14,35 +14,5 @@ namespace TahsilatUyg_
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("MusteriBilgi.aspx");
-        }
-
-        protected void Button2_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("UrunBilgi.aspx");
-        }
-
-        protected void Button3_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("Tahsilat.aspx");
-        }
-
-        protected void Button4_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("KefilBilgi.aspx");
-        }
-
-        protected void Button5_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("MusteriTakip.aspx");
-        }
-
-        protected void Button6_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("OdemeTakip.aspx");
-
-        }
     }
 }

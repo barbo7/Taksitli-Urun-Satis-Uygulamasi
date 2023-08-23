@@ -49,7 +49,7 @@ namespace TahsilatUyg_
             SqlCommand cmd = new SqlCommand("Insert Into TBL_KEFIL(musteri_id,kefil_ad_soyad,telno,tc) VALUES(" + DropDownList1.SelectedValue + ",'" + TextBox1.Text + "','" + TextBox2.Text + "','" + TextBox3.Text + "')", con);
             cmd.ExecuteNonQuery();
             con.Close();
-            Response.Write("İşlem başarıyla tamamlandı!");
+            successAlert.Style["display"] = "block";
         }
 
         protected void Button2_Click(object sender, EventArgs e)

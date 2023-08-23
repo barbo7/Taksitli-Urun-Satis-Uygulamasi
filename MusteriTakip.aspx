@@ -95,4 +95,13 @@
     <br />
     <asp:Button ID="Button3" class="btn btn-success btn-rounded" runat="server" OnClick="Button3_Click" Text="Güncelle" />
     <br />
+    <div id="successAlert" runat="server" class="sufee-alert alert with-close alert-success alert-dismissible fade show" style="display: none;">
+        <span class="badge badge-pill badge-success">Başarılı!</span> Kayıt gerçekleştirildi.
+        <button aria-label="Close" class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <p>
+        &nbsp;</p>
+    <br />
  </asp:Content>

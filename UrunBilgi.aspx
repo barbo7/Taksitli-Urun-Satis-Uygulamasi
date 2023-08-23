@@ -56,6 +56,17 @@
         </p>
         <p>
 &nbsp;&nbsp;&nbsp;
+            <br />
+
             <asp:Button ID="Button1" class="btn btn-success btn-rounded" runat="server" OnClick="Button1_Click" Text="Ürün Kaydet" />
         </p>
+            <div class="sufee-alert alert with-close alert-success alert-dismissible fade show" runat="server" id="successAlert" style="display: none;">
+            <span class="badge badge-pill badge-success">Başarılı!</span>
+            Ürün Kayıdı gerçekleştirildi.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <p>
+            &nbsp;</p>
 </asp:Content>
