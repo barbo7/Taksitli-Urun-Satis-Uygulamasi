@@ -253,7 +253,7 @@
           <ul class="list-unstyled navbar__sub-list js-sub-list">
             <li>
               <a href="MusteriTakip.aspx">
-                <i class="fas fa-calendar-alt"></i>Müşteri Takip</a>
+                <i class="fas fa-calendar-alt"></i>Müşteri Takip/Ürün Ödeme</a>
             </li>
             <li>
               <a href="OdemeTakip.aspx">

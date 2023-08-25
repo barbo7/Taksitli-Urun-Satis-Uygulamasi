@@ -6,17 +6,39 @@
             border-radius: 20px;
             padding: 10px 20px;
         }
+
+    .custom-icon {
+        font-size: 24px; /* İstediğiniz büyüklüğü ayarlayın */
+        border-radius: 50%; /* Yuvarlak şekli sağlar */
+        padding: 10px; /* İkon ile etrafındaki boşluğu ayarlar */
+        position: fixed; /* Sayfa içinde sabit pozisyon */
+        top: 15%; /* Yatay ortalanmış pozisyon */
+        right: 0; /* Sağ taraftan 0 uzaklıkta */
+        cursor: pointer;
+    }
+
     </style>
+
+
+
+
 </asp:Content>
+
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
     <br />
     <br />
+    <i class="fa fa-angle-double-down custom-icon" aria-hidden="true" id ="icon"></i>
+
 
     <asp:Label ID="Label1" runat="server" Text="Müşteri Arama: " Font-Bold="False" ForeColor="Black"></asp:Label>
-    <br />
+
     <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" OnTextChanged="TextBox1_TextChanged" BorderWidth="1px" Font-Bold="False" Font-Overline="False"></asp:TextBox>
+  
 
     <br />
+
+
+
 
     <br />
         <!-- DATA TABLE 1-->
@@ -43,7 +65,6 @@
                 </div>
     <br />
     <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Müşteri Ödeme Güncelleme" ForeColor="Black"></asp:Label>
-    <br />
     <br />
     <asp:Label ID="Label3" runat="server" Text="Müşteri id:" ForeColor="Black"></asp:Label>
     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -100,7 +121,41 @@
             <span aria-hidden="true">×</span>
         </button>
     </div>
+    <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show" runat="server" id="unsuccessAlert" style="display: none;">
+<span class="badge badge-pill badge-danger">Başarısız!</span>
+Ödeme Miktarı Ürün Ücretinden fazla!
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+</div>
     <p>
         &nbsp;</p>
     <br />
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          var iconElement = document.getElementById("icon");
+          iconElement.addEventListener("click", function () {
+              var labelElement = document.getElementById('<%= Label2.ClientID %>');
+              labelElement.scrollIntoView({ behavior: "smooth" });
+              window.scrollBy(0, -75);
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+          var textBox3 = document.getElementById('<%= TextBox3.ClientID %>');
+
+          textBox3.addEventListener("input", function () {
+              window.scrollTo(0, document.body.scrollHeight);
+          });
+      });
+      document.addEventListener("DOMContentLoaded", function () {
+          var textBox2 = document.getElementById('<%= TextBox2.ClientID %>');
+
+          textBox2.addEventListener("input", function () {
+              var labelElement = document.getElementById('<%= Label2.ClientID %>');
+              labelElement.scrollIntoView({ behavior: "smooth" });
+              window.scrollBy(0, -75);// sayfa refresh olduğu için çalışmıyor
+          });
+      });
+  </script>
  </asp:Content>

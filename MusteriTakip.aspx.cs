@@ -59,7 +59,7 @@ namespace TahsilatUyg_
                 }
                 else
                 {
-                    Response.Write("Ödeme Miktarı Ürün Ücretinden fazla!");
+                    unsuccessAlert.Style["display"] = "block";
                 }
             }
 
