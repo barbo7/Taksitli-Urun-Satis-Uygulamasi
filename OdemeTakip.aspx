@@ -9,7 +9,7 @@
             <br />
         <asp:Label ID="Label2" runat="server" Text="Müşteri Arama"></asp:Label>
         <br />
-        <asp:TextBox ID="TextBox1" runat="server" CssClass="form-check-inline" BorderWidth="1px" AutoPostBack="true" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" BorderWidth="1px" AutoPostBack="true" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
         <br />
         <br />
       <!-- DATA TABLE 2-->

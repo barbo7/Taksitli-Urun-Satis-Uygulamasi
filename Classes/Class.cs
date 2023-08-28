@@ -31,6 +31,13 @@ namespace TahsilatUyg_.Classes
 
             return bilgiler;
         }
+
+        public void OdemeGecikmeTespit()
+        {
+            SqlConnection con = new SqlConnection(connectionStringGenel);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("");
+        }
         public Dictionary<string,int> AnaSayfaChart()
         {
             Dictionary<string, int> chart = new Dictionary<string, int>();
@@ -119,12 +126,41 @@ namespace TahsilatUyg_.Classes
         //    gridV.DataSource = dt;
         //    gridV.DataBind();
         //}
+        public string MusteriTakipBaslangic()
+        {
+            StringBuilder htmlBuilder = new StringBuilder();
+            SqlConnection con = new SqlConnection(connectionStringGenel);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT * FROM MUSTERI_TAKSIT_BILGILERI", con);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while(reader.Read())
+            {
+                htmlBuilder.Append("<tr>");
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Müşteri Id"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Ad Soyad"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Borç"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Ödenen"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Kalan"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["MaksimumTaksit Miktarı"].ToString());
+                htmlBuilder.Append("</tr>");
+            }
+            reader.Close();
+            con.Close();
+
+            return htmlBuilder.ToString();
+        }
         public string AdVeyaIdGoreTable(string veri)
         {
             StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE[AD SOYAD] like '" + veri + "%' OR [Müşteri Id] like '" + veri + "%'", con);
+            SqlCommand cmd = new SqlCommand();
+            if (!int.TryParse(veri, out int veri1))
+                cmd = new SqlCommand("SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE [AD SOYAD] LIKE @arama + '%'", con);
+            else
+                cmd = new SqlCommand("SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE [Müşteri Id] = @arama", con);
+            cmd.Parameters.AddWithValue("@arama", veri);
+
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
@@ -144,6 +180,7 @@ namespace TahsilatUyg_.Classes
 
             return htmlBuilder.ToString();
         }
+
 
         public string AdVeyaIdGoreListeleOT2(string veri)
         {

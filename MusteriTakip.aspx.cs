@@ -24,6 +24,12 @@ namespace TahsilatUyg_
             RegularExpressionValidator1.ValidationExpression = @"^\d+$";
             RegularExpressionValidator2.ControlToValidate = TextBox3.ID;
             RegularExpressionValidator2.ValidationExpression = @"^\d+(\.\d+)?$";
+
+            if (!IsPostBack) {
+                string tabloBaslangic = Vt.MusteriTakipBaslangic();
+                myLiteralControl.Text = tabloBaslangic;
+            }
+
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)

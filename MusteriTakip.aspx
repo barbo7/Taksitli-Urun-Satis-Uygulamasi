@@ -16,10 +16,41 @@
         right: 0; /* Sağ taraftan 0 uzaklıkta */
         cursor: pointer;
     }
+    .table-container {
+        height: 300px;
+        overflow-y: scroll;
+    }
 
+    .table-container table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .table-container th {
+        position: sticky;
+        top: 0;
+        background-color: #666666;
+        z-index: 2;
+    }
+
+    
+        .auto-style1 {
+            display: block;
+            width: 100%;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #495057;
+            background-clip: padding-box;
+            border-radius: 2px;
+            transition: none;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border: 1px solid #ced4da;
+            background-color: #fff;
+        }
+
+    
     </style>
-
-
 
 
 </asp:Content>
@@ -42,7 +73,7 @@
 
     <br />
         <!-- DATA TABLE 1-->
-                <div class="table-responsive m-b-40" style="height: 300px">
+                <div class="table-responsive table-container m-b-40" style="height: 300px">
                     <table class="table table-borderless table-data3" >
                         <thead>
                             <tr>
@@ -69,7 +100,7 @@
     <asp:Label ID="Label3" runat="server" Text="Müşteri id:" ForeColor="Black"></asp:Label>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <br />
-    <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="TextBox2_TextChanged" BorderWidth="1px"></asp:TextBox>
+    <asp:TextBox ID="TextBox2" runat="server" CssClass="auto-style1" TextMode="Number" AutoPostBack="true" OnTextChanged="TextBox2_TextChanged" BorderWidth="1px"></asp:TextBox>
     <br />
     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Müşteri id Boş bırakılamaz" ForeColor="Red"></asp:RequiredFieldValidator>
     &nbsp;
