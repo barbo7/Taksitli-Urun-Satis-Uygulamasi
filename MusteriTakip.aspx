@@ -47,7 +47,7 @@
                         <thead>
                             <tr>
                                 <th>Müşteri ID</th>
-                                <th>Ad Soyad</th>
+                                <th>Ad Soyad</th>33
                                 <th>Toplam Borç</th>
                                 <th>Ödenen Toplam</th>
                                 <th>Kalan Toplam</th>
