@@ -35,7 +35,7 @@
             <asp:Label ID="Label2" runat="server" Text="Ürün adı*:"></asp:Label>
         </p>
         <p>
-            <asp:TextBox ID="TextBox1" BorderWidth="1px" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+            <asp:TextBox CssClass="form-control"  ID="TextBox1" BorderWidth="1px" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
             </p>
         <p>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="TextBox1"
@@ -46,7 +46,7 @@
             <asp:Label ID="Label3" runat="server" Text="Ürün Fiyatı*:"></asp:Label>
         </p>
         <p>
-            <asp:TextBox ID="TextBox2" BorderWidth="1px" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Number"></asp:TextBox>
+            <asp:TextBox ID="TextBox2" CssClass="form-control"  BorderWidth="1px" runat="server" OnTextChanged="TextBox2_TextChanged" TextMode="Number"></asp:TextBox>
         </p>
         <p>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TextBox1"

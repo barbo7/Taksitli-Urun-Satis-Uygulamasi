@@ -32,7 +32,7 @@
 
     <asp:Label ID="Label1" runat="server" Text="Müşteri Arama: " Font-Bold="False" ForeColor="Black"></asp:Label>
 
-    <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" OnTextChanged="TextBox1_TextChanged" BorderWidth="1px" Font-Bold="False" Font-Overline="False"></asp:TextBox>
+    <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" CssClass="form-control" OnTextChanged="TextBox1_TextChanged" BorderWidth="1px" Font-Bold="False" Font-Overline="False"></asp:TextBox>
   
 
     <br />
@@ -47,7 +47,7 @@
                         <thead>
                             <tr>
                                 <th>Müşteri ID</th>
-                                <th>Ad Soyad</th>33
+                                <th>Ad Soyad</th>
                                 <th>Toplam Borç</th>
                                 <th>Ödenen Toplam</th>
                                 <th>Kalan Toplam</th>
@@ -69,7 +69,7 @@
     <asp:Label ID="Label3" runat="server" Text="Müşteri id:" ForeColor="Black"></asp:Label>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <br />
-    <asp:TextBox ID="TextBox2" runat="server" TextMode="Number" AutoPostBack="true" OnTextChanged="TextBox2_TextChanged" BorderWidth="1px"></asp:TextBox>
+    <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="Number" AutoPostBack="true" OnTextChanged="TextBox2_TextChanged" BorderWidth="1px"></asp:TextBox>
     <br />
     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Müşteri id Boş bırakılamaz" ForeColor="Red"></asp:RequiredFieldValidator>
     &nbsp;
@@ -100,7 +100,7 @@
 
     <asp:Label ID="Label4" runat="server" Text="Ödenen yeni miktar:" ForeColor="Black"></asp:Label>
     <br />
-    <asp:TextBox ID="TextBox3" TextMode="Number" runat="server" BorderWidth="1px"></asp:TextBox>
+    <asp:TextBox ID="TextBox3" CssClass="form-control" TextMode="Number" runat="server" BorderWidth="1px"></asp:TextBox>
     <br />
     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Ödenen Miktar Giriniz" ForeColor="Red"></asp:RequiredFieldValidator>
     &nbsp;
@@ -109,7 +109,7 @@
 
     <asp:Label ID="Label5" runat="server" Text="Tahsilatı yapılacak Ürün" ForeColor="Black"></asp:Label>
     <br />
-    <asp:DropDownList ID="DropDownList1" AutoPostBack="true" runat="server" Height="30px" Width="121px">
+    <asp:DropDownList ID="DropDownList1" CssClass="form-check-inline" AutoPostBack="true" runat="server" Height="30px" Width="121px">
     </asp:DropDownList>
     <br />
     <br />
