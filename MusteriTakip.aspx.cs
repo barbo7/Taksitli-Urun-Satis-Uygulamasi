@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Text;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.Expressions;
 
 namespace TahsilatUyg_
 {
@@ -25,11 +27,21 @@ namespace TahsilatUyg_
             RegularExpressionValidator2.ControlToValidate = TextBox3.ID;
             RegularExpressionValidator2.ValidationExpression = @"^\d+(\.\d+)?$";
 
+            RangeValidator1.ControlToValidate = TextBox3.ID;
             if (!IsPostBack) {
                 string tabloBaslangic = Vt.MusteriTakipBaslangic();
                 myLiteralControl.Text = tabloBaslangic;
             }
+            else
+            {
+                string script = @"<script type='text/javascript'>
+                            function scrollToBottom() {
+                                window.scrollTo(0, document.body.scrollHeight);
+                            }   
+                          </script>";
 
+                ClientScript.RegisterStartupScript(this.GetType(), "scrollScript", script);
+            }
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -43,7 +55,9 @@ namespace TahsilatUyg_
             SqlConnection con = new SqlConnection(connectionStringGenel);
             decimal toplam, odenen;
             con.Open();
-            SqlCommand odeme = new SqlCommand("SELECT toplam_fiyat,odenen FROM TBL_TAKSITLER WHERE musteri_id =" + TextBox2.Text, con);
+            SqlCommand odeme = new SqlCommand("SELECT toplam_fiyat,odenen FROM TBL_TAKSITLER WHERE musteri_id = @musteri_id", con);
+            odeme.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
+
             SqlDataReader reader = odeme.ExecuteReader();
             if (reader.Read())
             {
@@ -53,7 +67,11 @@ namespace TahsilatUyg_
                 if(odenen <=toplam)
                 {
                     reader.Close();
-                    SqlCommand cmd = new SqlCommand("Update TBL_TAKSITLER SET odenen =" + odenen + " WHERE musteri_id =" + TextBox2.Text + " AND taksit_id=" + DropDownList1.SelectedValue, con);
+                    SqlCommand cmd = new SqlCommand("Update TBL_TAKSITLER SET odenen = @odenen WHERE musteri_id = @musteri_id AND taksit_id= @taksit", con);
+                    cmd.Parameters.AddWithValue("@odenen", odenen);
+                    cmd.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
+                    cmd.Parameters.AddWithValue("@taksit", odenen);
+
                     cmd.ExecuteNonQuery();
                     successAlert.Style["display"] = "block";
                     myLiteralControl.Text = "";
@@ -86,7 +104,10 @@ namespace TahsilatUyg_
             DropDownList1.DataValueField = "taksit_id";
             DropDownList1.DataBind();
 
-            SqlCommand cmd = new SqlCommand("SELECT [AD SOYAD],[Ürün Adı],[Alış Tarihi],[Kalan Tutar],[Aylık Taksit Tutarı] FROM TARIH_BILGI WHERE [musteri_id]=" + TextBox2.Text, con);
+
+            SqlCommand cmd = new SqlCommand("SELECT [AD SOYAD],[Ürün Adı],[Alış Tarihi],[Kalan Tutar],[Aylık Taksit Tutarı] FROM TARIH_BILGI WHERE [musteri_id]= @musteri_id", con);
+            cmd.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
+
             SqlDataReader reader = cmd.ExecuteReader();
             while(reader.Read())
             {
@@ -102,6 +123,37 @@ namespace TahsilatUyg_
             Literal2.Text = htmlBuilderA.ToString();
             reader.Close();
             con.Close();
+            FiyatGetir();
         }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection(connectionStringGenel);
+            
+        }
+        void FiyatGetir()
+        {
+          
+                string selectedValue = DropDownList1.SelectedItem.Text; // DataValueField'a bakın
+                SqlConnection con = new SqlConnection(connectionStringGenel);
+
+                if (int.TryParse(TextBox2.Text, out int musteriId))
+                {
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT [Aylık Taksit Tutarı] FROM TARIH_BILGI WHERE [Ürün Adı]= @urunadi and musteri_id= @id", con);
+                    cmd.Parameters.AddWithValue("@urunadi", selectedValue);
+                    cmd.Parameters.AddWithValue("@id", musteriId);
+
+                    object deger = cmd.ExecuteScalar();
+
+                    if (deger != null && deger != DBNull.Value)
+                    {
+                        decimal maxAlinmakIstenen = (decimal)deger;
+                    RangeValidator1.MaximumValue = maxAlinmakIstenen.ToString();
+                    TextBox3.Text = maxAlinmakIstenen.ToString();
+                    }
+                }
+        }
+
     }
 }

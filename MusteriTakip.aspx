@@ -100,7 +100,7 @@
     <asp:Label ID="Label3" runat="server" Text="Müşteri id:" ForeColor="Black"></asp:Label>
     &nbsp;&nbsp;&nbsp;&nbsp;
     <br />
-    <asp:TextBox ID="TextBox2" runat="server" CssClass="auto-style1" TextMode="Number" AutoPostBack="true" OnTextChanged="TextBox2_TextChanged" BorderWidth="1px"></asp:TextBox>
+    <asp:TextBox ID="TextBox2" runat="server" CssClass="auto-style1" TextMode="Number" AutoPostBack="true" OnClientClick="scrollToBottom();"  OnTextChanged="TextBox2_TextChanged" BorderWidth="1px"></asp:TextBox>
     <br />
     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Müşteri id Boş bırakılamaz" ForeColor="Red"></asp:RequiredFieldValidator>
     &nbsp;
@@ -132,6 +132,7 @@
     <asp:Label ID="Label4" runat="server" Text="Ödenen yeni miktar:" ForeColor="Black"></asp:Label>
     <br />
     <asp:TextBox ID="TextBox3" CssClass="form-control" TextMode="Number" runat="server" BorderWidth="1px"></asp:TextBox>
+    <asp:RangeValidator ID="RangeValidator1" runat="server" ErrorMessage="Tek Ödemede Alınabilecek miktar Sınırlıdır" ForeColor="#990033"></asp:RangeValidator>
     <br />
     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Ödenen Miktar Giriniz" ForeColor="Red"></asp:RequiredFieldValidator>
     &nbsp;
@@ -140,11 +141,11 @@
 
     <asp:Label ID="Label5" runat="server" Text="Tahsilatı yapılacak Ürün" ForeColor="Black"></asp:Label>
     <br />
-    <asp:DropDownList ID="DropDownList1" CssClass="form-check-inline" AutoPostBack="true" runat="server" Height="30px" Width="121px">
+    <asp:DropDownList ID="DropDownList1" CssClass="form-check-inline" AutoPostBack="true" runat="server" Height="30px" Width="121px" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
     </asp:DropDownList>
     <br />
     <br />
-    <asp:Button ID="Button3" class="btn btn-success btn-rounded" runat="server" OnClick="Button3_Click" Text="Güncelle" />
+    <asp:Button ID="Button3" class="btn btn-success btn-rounded" OnClientClick="scrollToBottom();"  runat="server" OnClick="Button3_Click" Text="Güncelle" />
     <br />
     <div id="successAlert" runat="server" class="sufee-alert alert with-close alert-success alert-dismissible fade show" style="display: none;">
         <span class="badge badge-pill badge-success">Başarılı!</span> Kayıt gerçekleştirildi.
@@ -158,6 +159,9 @@
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
 </button>
+
+                                    <asp:Literal ID="LiteralError" runat="server"></asp:Literal>
+
 </div>
     <p>
         &nbsp;</p>
