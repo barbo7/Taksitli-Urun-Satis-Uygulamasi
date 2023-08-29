@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Web.UI;
+using TahsilatUyg_.Classes;
 
 namespace TahsilatUyg_
 {
@@ -40,13 +42,41 @@ namespace TahsilatUyg_
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            VeriTabani vt = new VeriTabani();
             SqlConnection con = new SqlConnection(connectionStringGenel);
-            con.Open();
-            string sqlC = String.Format("Insert Into TBL_MUSTERI(ad_soyad,tc,telno,vergi_kimlik_no,adres) VALUES('{0}','{1}','{2}','{3}','{4}')", TextBox1.Text, TextBox2.Text, TextBox3.Text, TextBox4.Text, TextBox5.Text);
-            SqlCommand cmd = new SqlCommand(sqlC, con);
-            cmd.ExecuteNonQuery();
-            con.Close();
-            successAlert.Style["display"] = "block";
+            bool engelleyimMi = vt.MusteriTekrarEngel(TextBox1.Text, TextBox2.Text);
+
+            try
+            {
+                con.Open();
+
+                if (!engelleyimMi)
+                {
+                    SqlCommand cmd = new SqlCommand("Insert Into TBL_MUSTERI(ad_soyad,tc,telno,vergi_kimlik_no,adres) VALUES(@ad,@tc,@tel,@veriK,@adres)", con);
+                    cmd.Parameters.AddWithValue("@ad", TextBox1.Text);
+                    cmd.Parameters.AddWithValue("@tc", TextBox2.Text);
+                    cmd.Parameters.AddWithValue("@tel", TextBox3.Text);
+                    cmd.Parameters.AddWithValue("@veriK", TextBox4.Text);
+                    cmd.Parameters.AddWithValue("@adres", TextBox5.Text);
+
+                    cmd.ExecuteNonQuery();
+                    successAlert.Style["display"] = "block";
+                }
+                else
+                    unsuccessAlert.Style["display"] = "block";
+
+
+            }
+            catch (Exception ex) {
+                unsuccessAlert.Style["display"] = "block";
+                unsuccessAlert.InnerText = "Bir hata oluştu: " + ex.Message;
+            }
+            finally
+            {
+                con.Close();
+            }
+           
+           
         }
 
         protected void TextBox4_TextChanged(object sender, EventArgs e)

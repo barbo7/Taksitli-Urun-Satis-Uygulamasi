@@ -92,6 +92,21 @@ namespace TahsilatUyg_.Classes
             con.Close();
         }
 
+        public bool MusteriTekrarEngel(string ad, string tc) {
+            bool engel = false;
+            SqlConnection con = new SqlConnection(connectionStringGenel);
+            con.Open();
+            SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM TBL_MUSTERI WHERE ad_soyad = @ad or tc = @tc", con);
+            cmd.Parameters.AddWithValue("@ad", ad);
+            cmd.Parameters.AddWithValue("@tc", tc);
+            int sayi = (int)cmd.ExecuteScalar();
+            if (sayi > 0)
+                engel = true;
+            con.Close();
+
+
+            return engel; }
+
         public void UrunAdi(DropDownList ddl)
         {
             SqlConnection con = new SqlConnection(connectionStringGenel);
