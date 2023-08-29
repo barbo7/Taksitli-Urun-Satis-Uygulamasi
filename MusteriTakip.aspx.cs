@@ -105,7 +105,7 @@ namespace TahsilatUyg_
             DropDownList1.DataBind();
 
 
-            SqlCommand cmd = new SqlCommand("SELECT [AD SOYAD],[Ürün Adı],[Alış Tarihi],[Kalan Tutar],[Aylık Taksit Tutarı] FROM TARIH_BILGI WHERE [musteri_id]= @musteri_id", con);
+            SqlCommand cmd = new SqlCommand("SELECT [AD SOYAD],[Ürün Adı],[Alış Tarihi],[Kalan Tutar],[Aylık Taksit Tutarı]FROM TARIH_BILGI WHERE [musteri_id]= @musteri_id", con);
             cmd.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -117,6 +117,7 @@ namespace TahsilatUyg_
                 htmlBuilderA.AppendFormat("<td>{0}</td>", reader["Alış Tarihi"].ToString());
                 htmlBuilderA.AppendFormat("<td>{0}</td>", reader["Kalan Tutar"].ToString());
                 htmlBuilderA.AppendFormat("<td>{0}</td>", reader["Aylık Taksit Tutarı"].ToString());
+
                 htmlBuilderA.Append("</tr>");
             }
 
@@ -134,6 +135,7 @@ namespace TahsilatUyg_
         void FiyatGetir()
         {
           
+            if(DropDownList1.SelectedItem.Text != "") { 
                 string selectedValue = DropDownList1.SelectedItem.Text; // DataValueField'a bakın
                 SqlConnection con = new SqlConnection(connectionStringGenel);
 
@@ -153,6 +155,7 @@ namespace TahsilatUyg_
                     TextBox3.Text = maxAlinmakIstenen.ToString();
                     }
                 }
+            }
         }
 
     }

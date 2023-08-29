@@ -156,7 +156,8 @@ namespace TahsilatUyg_.Classes
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Borç"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Ödenen"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Kalan"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["MaksimumTaksit Miktarı"].ToString());
+
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Maksimum Taksit Miktarı"].ToString());
                 htmlBuilder.Append("</tr>");
             }
             reader.Close();
@@ -170,10 +171,11 @@ namespace TahsilatUyg_.Classes
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
             SqlCommand cmd = new SqlCommand();
+            string cumle = "SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE";
             if (!int.TryParse(veri, out int veri1))
-                cmd = new SqlCommand("SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE [AD SOYAD] LIKE @arama + '%'", con);
+                cmd = new SqlCommand(cumle + " [AD SOYAD] LIKE @arama + '%'", con);
             else
-                cmd = new SqlCommand("SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE [Müşteri Id] = @arama", con);
+                cmd = new SqlCommand(cumle + " [Müşteri Id] = @arama", con);
             cmd.Parameters.AddWithValue("@arama", veri);
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -186,7 +188,7 @@ namespace TahsilatUyg_.Classes
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Borç"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Ödenen"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Kalan"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["MaksimumTaksit Miktarı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Maksimum Taksit Miktarı"].ToString());
                 htmlBuilder.Append("</tr>");
             }
 
@@ -202,7 +204,8 @@ namespace TahsilatUyg_.Classes
             StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
-            SqlCommand cmd2 = new SqlCommand("SELECT [ad_soyad] 'Ad Soyad',[urun_ad] 'Satılan Ürün Adı',[odenen_miktar] 'Ödenen Tutar',[tarih] 'Tarih' FROM SATIS_TUTANAGI WHERE musteri_id like '" + veri + "%' or ad_soyad like '" + veri + "%'", con);
+            SqlCommand cmd2 = new SqlCommand("SELECT [ad_soyad] 'Ad Soyad',[urun_ad] 'Satılan Ürün Adı',[odenen_miktar] 'Ödenen Tutar',[tarih] 'Tarih',[Eksik Tutar] FROM SATIS_TUTANAGI WHERE musteri_id like @veri + '%' or ad_soyad like @veri + '%'", con);
+            cmd2.Parameters.AddWithValue("@veri", veri);
             SqlDataReader dr2 = cmd2.ExecuteReader();
             while (dr2.Read())
             {
@@ -211,6 +214,8 @@ namespace TahsilatUyg_.Classes
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Satılan Ürün Adı"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Ödenen Tutar"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Tarih"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Eksik Tutar"].ToString());
+
                 htmlBuilder.Append("</tr>");
             }
             dr2.Close();
@@ -222,7 +227,7 @@ namespace TahsilatUyg_.Classes
             StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi' FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like '" + veri + "%' OR musteri_id like'" + veri + "')", con);
+            SqlCommand cmd = new SqlCommand("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi',ot.eksik_miktar as 'Eksik Ödenen Miktar' FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN TBL_ODENEN_TAKSITLER ot on ot.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like '" + veri + "%' OR musteri_id like'" + veri + "')", con);
             SqlDataReader dr = cmd.ExecuteReader();
             while(dr.Read())
             {
@@ -233,6 +238,7 @@ namespace TahsilatUyg_.Classes
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr["Toplam Fiyat"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr["Toplam Ödenen"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr["Ödeme Başlangıç Tarihi"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Eksik Ödenen Miktar"].ToString());
                 htmlBuilder.Append("</tr>");
 
             }

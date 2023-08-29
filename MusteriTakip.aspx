@@ -116,11 +116,12 @@
                             <th>Alış Tarihi</th>
                             <th>Kalan Tutar</th>
                             <th>Aylık Taksit Tutarı</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="6">
+                            <td colspan="5">
                                 <asp:Literal ID="Literal2" runat="server"></asp:Literal>
                             </td>
                         </tr>

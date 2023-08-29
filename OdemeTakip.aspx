@@ -44,11 +44,13 @@
                 <th class="auto-style1">Ürün Adı</th>
                 <th class="auto-style2">Ödenen Tutar</th>
                 <th>Tarih</th>
+                <th>Eksik Miktar</th>
+
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td colspan="6">
+                <td colspan="5">
                     <asp:Literal ID="Literal2" runat="server"></asp:Literal>
                 </td>
             </tr>
