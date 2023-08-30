@@ -135,7 +135,7 @@ namespace TahsilatUyg_
         void FiyatGetir()
         {
           
-            if(DropDownList1.SelectedItem.Text != "") { 
+            if(DropDownList1.Items.Count != 0) { 
                 string selectedValue = DropDownList1.SelectedItem.Text; // DataValueField'a bakın
                 SqlConnection con = new SqlConnection(connectionStringGenel);
 
@@ -151,7 +151,8 @@ namespace TahsilatUyg_
                     if (deger != null && deger != DBNull.Value)
                     {
                         decimal maxAlinmakIstenen = (decimal)deger;
-                    RangeValidator1.MaximumValue = maxAlinmakIstenen.ToString();
+                        RangeValidator1.MinimumValue = 1.ToString();
+                        RangeValidator1.MaximumValue = maxAlinmakIstenen.ToString();
                     TextBox3.Text = maxAlinmakIstenen.ToString();
                     }
                 }

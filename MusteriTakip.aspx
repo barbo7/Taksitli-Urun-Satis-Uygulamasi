@@ -83,11 +83,13 @@
                                 <th>Ödenen Toplam</th>
                                 <th>Kalan Toplam</th>
                                 <th>Maksimum Taksit Miktarı</th>
+                                <th>Müşteri Notu</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colspan="6">
+                                <td colspan="7">
                                     <asp:Literal ID="myLiteralControl" runat="server"></asp:Literal>
                                 </td>
                             </tr>

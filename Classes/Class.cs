@@ -145,22 +145,65 @@ namespace TahsilatUyg_.Classes
         {
             StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT * FROM MUSTERI_TAKSIT_BILGILERI", con);
-            SqlDataReader reader = cmd.ExecuteReader();
-            while(reader.Read())
-            {
-                htmlBuilder.Append("<tr>");
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Müşteri Id"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Ad Soyad"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Borç"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Ödenen"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Kalan"].ToString());
+            SqlDataAdapter adp = new SqlDataAdapter();// bununla cmd üzerinden gelen verileri okuyup datasete tablo olarak çekiyorsun
+            DataSet ds = new DataSet(); //sql deki talbonun aynısını buraya çekersin sorgunu bu sayede işlem yapman daha kolay 
 
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Maksimum Taksit Miktarı"].ToString());
+            con.Open();
+            SqlCommand cmd = new SqlCommand();// komusa satırını 1 kerelik tanımlamana gerek yok tek sefer tanımla her yerde kullan cmd.command text ile ver dur sql cümlelerini sadece dikkat etmen gereken nokta parametre verirsen parametlerleri clear yap 
+            cmd.Connection = con;
+            cmd.CommandText = "SELECT * FROM MUSTERI_TAKSIT_BILGILERI"; // niye viewle çalışıyon :D addwithvalue bilmediğim için enjectiona karşı önlem alm dedm abi.s gerek yok artık biliyorsun 
+            adp.SelectCommand = cmd;
+            adp.Fill(ds, "TableMusteriTaksit");
+
+            for (int i = 0; i < ds.Tables["TableMusteriTaksit"].Rows.Count; i++)
+            {
+                string tr = "<tr>";
+               // cmd.Parameters.Clear();
+               // ds.Tables["GelenTABLO"]?.Clear();
+               //cmd.CommandText = "select eksik_miktar from TBL_ODENEN_TAKSITLER where (taksit_id in(select taksit_id from TBL_TAKSITLER where musteri_id =@veri)) and eksik_miktar is not null";
+               // cmd.Parameters.AddWithValue("@veri", ds.Tables["TableMusteriTaksit"].Rows[i]["Müşteri Id"].ToString()); // bu şekilde addwith valu ile verilerini gönderirsen sql inj yemezsin Tamamdır abi
+                 
+               // adp.Fill(ds, "GelenTABLO");
+
+               // if (ds.Tables["GelenTABLO"].Rows.Count > 0 )
+               //     tr = "<tr style=\"color: red;\">";//Borcu varsasatırı kırmızıya boyaycaz
+
+
+                htmlBuilder.Append(tr);
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["TableMusteriTaksit"].Rows[i]["Müşteri Id"].ToString());// kullanırken list gibi düşüne bilirsin satır sutun olarak sana bir not select * from olarak çekmektense selec 
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["TableMusteriTaksit"].Rows[i]["Ad Soyad"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["TableMusteriTaksit"].Rows[i]["Toplam Borç"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["TableMusteriTaksit"].Rows[i]["Toplam Ödenen"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["TableMusteriTaksit"].Rows[i]["Toplam Kalan"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["TableMusteriTaksit"].Rows[i]["Maksimum Taksit Miktarı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["TableMusteriTaksit"].Rows[i]["Müşteri Notu"].ToString());
                 htmlBuilder.Append("</tr>");
-            }
-            reader.Close();
+            
+        }
+            //SqlDataReader reader = cmd.ExecuteReader();
+            //while (reader.Read())
+            //{
+            //    string tr = "<tr>";
+            //    SqlCommand sikintiMi = new SqlCommand("select eksik_miktar from TBL_ODENEN_TAKSITLER where taksit_id in(select taksit_id from TBL_TAKSITLER where musteri_id = @veri", con);
+            //    sikintiMi.Parameters.AddWithValue("@veri", reader["Müşteri Id"]);
+            //    //Müşterinin Borcu Olup Olmadığını Görmek için.
+            //    //object türünde alıyor ben böyle kullanmam yanlız 
+            //    var eksikMiktar = sikintiMi.ExecuteScalar();
+            //    if (eksikMiktar != default)
+            //        tr = "<tr style=\"color: red;\">";//Borcu varsasatırı kırmızıya boyaycaz
+
+            //    htmlBuilder.Append(tr);
+            //    htmlBuilder.AppendFormat("<td>{0}</td>", reader["Müşteri Id"].ToString());
+            //    htmlBuilder.AppendFormat("<td>{0}</td>", reader["Ad Soyad"].ToString());
+            //    htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Borç"].ToString());
+            //    htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Ödenen"].ToString());
+            //    htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Kalan"].ToString());
+            //    htmlBuilder.AppendFormat("<td>{0}</td>", reader["Maksimum Taksit Miktarı"].ToString());
+            //    htmlBuilder.AppendFormat("<td>{0}</td>", reader["Musteri Notu"].ToString());
+            //    htmlBuilder.Append("</tr>");
+            //}
+
+            //  reader.Close();
             con.Close();
 
             return htmlBuilder.ToString();
@@ -171,6 +214,15 @@ namespace TahsilatUyg_.Classes
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
             SqlCommand cmd = new SqlCommand();
+            SqlCommand sikintiMi = new SqlCommand("select eksik_miktar from TBL_ODENEN_TAKSITLER where taksit_id in(select taksit_id from TBL_TAKSITLER where musteri_id = @veri or musteri_id in (select musteri_id from TBL_MUSTERI where ad_soyad like @veri + '%'))", con);
+            sikintiMi.Parameters.AddWithValue("@veri", veri);
+            //Müşterinin Borcu Olup Olmadığını Görmek için.
+
+            string tr = "<tr>";
+            decimal? eksikMiktar = (decimal)sikintiMi.ExecuteScalar();
+            if (eksikMiktar != default)
+                tr = "<tr style=\"color: red;\">";//Borcu varsasatırı kırmızıya boyaycaz
+
             string cumle = "SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE";
             if (!int.TryParse(veri, out int veri1))
                 cmd = new SqlCommand(cumle + " [AD SOYAD] LIKE @arama + '%'", con);
@@ -182,13 +234,14 @@ namespace TahsilatUyg_.Classes
 
             while (reader.Read())
             {
-                htmlBuilder.Append("<tr>");
+                htmlBuilder.Append(tr);
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Müşteri Id"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Ad Soyad"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Borç"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Ödenen"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Kalan"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Maksimum Taksit Miktarı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Musteri Notu"].ToString());
                 htmlBuilder.Append("</tr>");
             }
 
@@ -227,7 +280,8 @@ namespace TahsilatUyg_.Classes
             StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi',ot.eksik_miktar as 'Eksik Ödenen Miktar' FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN TBL_ODENEN_TAKSITLER ot on ot.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like '" + veri + "%' OR musteri_id like'" + veri + "')", con);
+            SqlCommand cmd = new SqlCommand("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi'FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like @veri + '%' OR musteri_id = @veri')", con);
+            cmd.Parameters.AddWithValue("@veri", veri);
             SqlDataReader dr = cmd.ExecuteReader();
             while(dr.Read())
             {
@@ -238,7 +292,6 @@ namespace TahsilatUyg_.Classes
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr["Toplam Fiyat"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr["Toplam Ödenen"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", dr["Ödeme Başlangıç Tarihi"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", dr["Eksik Ödenen Miktar"].ToString());
                 htmlBuilder.Append("</tr>");
 
             }

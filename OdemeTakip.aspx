@@ -23,6 +23,7 @@
                   <th>Toplam Fiyat</th>
                   <th>Ödenen Toplam</th>
                   <th>Ödeme Başlangıç Tarihi</th>
+
               </tr>
           </thead>
           <tbody>
@@ -34,6 +35,9 @@
           </tbody>
       </table>
   </div>
+
+<asp:Label ID="Label4" runat="server" Text="Müşteri Ödeme Geçmişi" Font-Bold="True" Font-Underline="False" ForeColor="#993399"></asp:Label><br />
+
 
         <!-- DATA TABLE 2-->
 <div class="table-responsive m-b-40" style="height: 200px">
