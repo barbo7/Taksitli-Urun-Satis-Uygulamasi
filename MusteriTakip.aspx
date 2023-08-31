@@ -56,7 +56,8 @@
 </asp:Content>
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
-    <br />
+            <asp:Label ID="Label6" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Ödeme Sayfası"></asp:Label>
+            <br />
     <br />
     <i class="fa fa-angle-double-down custom-icon" aria-hidden="true" id ="icon"></i>
 
@@ -65,9 +66,6 @@
 
     <asp:TextBox ID="TextBox1" runat="server" AutoPostBack="true" CssClass="form-control" OnTextChanged="TextBox1_TextChanged" BorderWidth="1px" Font-Bold="False" Font-Overline="False"></asp:TextBox>
   
-
-    <br />
-
 
 
 

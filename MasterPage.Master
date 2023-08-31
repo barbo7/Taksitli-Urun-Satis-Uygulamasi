@@ -224,13 +224,12 @@
     <!-- MENU SIDEBAR-->
 <aside class="menu-sidebar d-none d-lg-block">
   <div class="logo">
-    <a href="#">
+    <a href="AnaSayfa.aspx">
       <img src="css/Taksit.png" alt="Taksitcim" />
     </a>
   </div>
   <div class="menu-sidebar__content js-scrollbar1">
     <nav class="navbar-sidebar">
-     <hr />
 
       <ul class="list-unstyled navbar__list">
         <li class="has-sub">
@@ -243,30 +242,25 @@
             <li>
               <a  href="KefilBilgi.aspx"><i class="fa fa-user-circle"></i>Kefil Bilgi Girişi</a>
             </li>
+
           </ul>
             <hr />
-
         </li>
         <li class="has-sub">
-          <a class="js-arrow" href="#">
-            <i class="fas fa-table"></i>Takip Listeleri</a>
-          <ul class="list-unstyled navbar__sub-list js-sub-list">
-            <li>
-              <a href="MusteriTakip.aspx">
-                <i class="fas fa-calendar-alt"></i>Müşteri Takip/Ürün Ödeme</a>
-            </li>
-            <li>
-              <a href="OdemeTakip.aspx">
-                <i class="fas fa-calendar-alt"></i>Ödeme Takip</a>
-            </li>
-          </ul>
-        </li>
+          <a  href="MusteriTakip.aspx">
+            <i class="fas fa-table"></i>Ürün Öde</a>
           <hr />
+            </li>
+        <li class="has-sub">
+            <a href="OdemeTakip.aspx">
+                <i class="fas fa-calendar-alt"></i>Tahsilat Listesi</a>
+          <hr />
+            </li>
         <li class="has-sub">
           <a href="Tahsilat.aspx">
             <i class="fa fa-credit-card"></i>Ürün Satış</a>
-        </li>
           <hr />
+        </li>
         <li class="has-sub">
           <a href="UrunBilgi.aspx">
             <i class="fa fa-tags"></i>Ürün Girişi</a>
@@ -290,25 +284,6 @@
 
     </div>
 </form>
-  <script>
-      document.addEventListener("DOMContentLoaded", function () {
-          const sidebar = document.querySelector(".navbar-sidebar");
-          const logo = document.querySelector(".logo a");
-          let isSidebarOpen = true;
-
-          logo.addEventListener("click", function () {
-              if (isSidebarOpen) {
-                  sidebar.style.width = "60px"; // Sidebar'ı küçült
-              } else {
-                  sidebar.style.width = "250px"; // Sidebar'ı aç
-              }
-              isSidebarOpen = !isSidebarOpen;
-          });
-      });
-  </script>
-
-
-
 
 
     <!-- Jquery JS-->

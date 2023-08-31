@@ -2,9 +2,7 @@
 
 <asp:Content ID="Content1" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
 
-            <br />
-            <br />
-            <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Tahsilat Takip"></asp:Label>
+            <asp:Label ID="Label1" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Bilgi Girişi"></asp:Label>
         &nbsp;
         <p>
             <asp:Label ID="Label2" runat="server" Text="Müşteri Adı*"></asp:Label>
