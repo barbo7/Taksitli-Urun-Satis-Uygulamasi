@@ -214,14 +214,14 @@ namespace TahsilatUyg_.Classes
             SqlConnection con = new SqlConnection(connectionStringGenel);
             con.Open();
             SqlCommand cmd = new SqlCommand();
-            SqlCommand sikintiMi = new SqlCommand("select eksik_miktar from TBL_ODENEN_TAKSITLER where taksit_id in(select taksit_id from TBL_TAKSITLER where musteri_id = @veri or musteri_id in (select musteri_id from TBL_MUSTERI where ad_soyad like @veri + '%'))", con);
-            sikintiMi.Parameters.AddWithValue("@veri", veri);
+            //SqlCommand sikintiMi = new SqlCommand("select eksik_miktar from TBL_ODENEN_TAKSITLER where taksit_id in(select taksit_id from TBL_TAKSITLER where musteri_id = @veri or musteri_id in (select musteri_id from TBL_MUSTERI where ad_soyad like @veri + '%'))", con);
+            //sikintiMi.Parameters.AddWithValue("@veri", veri);
             //Müşterinin Borcu Olup Olmadığını Görmek için.
 
-            string tr = "<tr>";
-            decimal? eksikMiktar = (decimal)sikintiMi.ExecuteScalar();
-            if (eksikMiktar != default)
-                tr = "<tr style=\"color: red;\">";//Borcu varsasatırı kırmızıya boyaycaz
+            //string tr = "<tr>";
+            //decimal? eksikMiktar = (decimal)sikintiMi.ExecuteScalar();
+            //if (eksikMiktar != default)
+            //    tr = "<tr style=\"color: red;\">";//Borcu varsasatırı kırmızıya boyaycaz
 
             string cumle = "SELECT * FROM MUSTERI_TAKSIT_BILGILERI WHERE";
             if (!int.TryParse(veri, out int veri1))
@@ -234,7 +234,7 @@ namespace TahsilatUyg_.Classes
 
             while (reader.Read())
             {
-                htmlBuilder.Append(tr);
+                htmlBuilder.Append("<tr>");
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Müşteri Id"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Ad Soyad"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Borç"].ToString());
@@ -256,22 +256,36 @@ namespace TahsilatUyg_.Classes
         {
             StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataSet ds = new DataSet();
             con.Open();
             SqlCommand cmd2 = new SqlCommand("SELECT [ad_soyad] 'Ad Soyad',[urun_ad] 'Satılan Ürün Adı',[odenen_miktar] 'Ödenen Tutar',[tarih] 'Tarih',[Eksik Tutar] FROM SATIS_TUTANAGI WHERE musteri_id like @veri + '%' or ad_soyad like @veri + '%'", con);
             cmd2.Parameters.AddWithValue("@veri", veri);
-            SqlDataReader dr2 = cmd2.ExecuteReader();
-            while (dr2.Read())
+            da.SelectCommand = cmd2;
+            da.Fill(ds, "Odeme Tablosu");
+            for (int i = 0; i < ds.Tables["Odeme Tablosu"].Rows.Count; i++)
             {
-                htmlBuilder.Append("<tr>");
-                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Ad Soyad"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Satılan Ürün Adı"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Ödenen Tutar"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Tarih"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", dr2["Eksik Tutar"].ToString());
+                string tr = "<tr>";
+                cmd2.Parameters.Clear();
+                ds.Tables["KirmiziMi"]?.Clear();
+                cmd2.CommandText = "SELECT eksik_miktar FROM TBL_ODENEN_TAKSITLER WHERE (taksit_id IN (SELECT taksit_id FROM TBL_TAKSITLER WHERE musteri_id IN (SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad = @veri)) AND eksik_miktar IS NOT NULL)";
+                cmd2.Parameters.AddWithValue("@veri", ds.Tables["Odeme Tablosu"].Rows[i]["Ad Soyad"].ToString());
+
+
+                da.Fill(ds, "KirmiziMi");
+
+                if (ds.Tables["KirmiziMi"].Rows.Count > 0)
+                    tr = "<tr style=\"color: red;\">";//Borcu varsasatırı kırmızıya boyaycaz
+
+                htmlBuilder.Append(tr);
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["Odeme Tablosu"].Rows[i]["Ad Soyad"]?.ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["Odeme Tablosu"].Rows[i]["Satılan Ürün Adı"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["Odeme Tablosu"].Rows[i]["Ödenen Tutar"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["Odeme Tablosu"].Rows[i]["Tarih"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["Odeme Tablosu"].Rows[i]["Eksik Tutar"]?.ToString());
 
                 htmlBuilder.Append("</tr>");
             }
-            dr2.Close();
             con.Close();
             return htmlBuilder.ToString();
         }
@@ -279,9 +293,11 @@ namespace TahsilatUyg_.Classes
         {
             StringBuilder htmlBuilder = new StringBuilder();
             SqlConnection con = new SqlConnection(connectionStringGenel);
+
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi'FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like @veri + '%' OR musteri_id = @veri')", con);
+            SqlCommand cmd = new SqlCommand("SELECT m.ad_soyad 'Ad Soyad',u.urun_ad 'Ürün Adı',t.kac_taksit 'Taksit Miktarı',t.toplam_fiyat 'Toplam Fiyat',t.odenen 'Toplam Ödenen',tt.eklenme_tarihi 'Ödeme Başlangıç Tarihi'FROM TBL_TAKSITLER t INNER JOIN TBL_MUSTERI m ON m.musteri_id=t.musteri_id INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id=t.taksit_id INNER JOIN URUN_TAKSIT u on u.taksit_id=t.taksit_id WHERE t.musteri_id in(SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad like @veri + '%' OR musteri_id = @veri)", con);
             cmd.Parameters.AddWithValue("@veri", veri);
+
             SqlDataReader dr = cmd.ExecuteReader();
             while(dr.Read())
             {
