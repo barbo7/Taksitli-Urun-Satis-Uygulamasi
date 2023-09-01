@@ -56,8 +56,8 @@ namespace TahsilatUyg_
             SqlConnection con = new SqlConnection(connectionStringGenel);
             decimal toplam, odenen;
             con.Open();
-            SqlCommand odeme = new SqlCommand("SELECT toplam_fiyat,odenen,taksit_id FROM TBL_TAKSITLER WHERE musteri_id = @musteri_id", con);
-            odeme.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
+            SqlCommand odeme = new SqlCommand("SELECT toplam_fiyat,odenen,taksit_id FROM TBL_TAKSITLER WHERE taksit_id = @taksit", con);
+            odeme.Parameters.AddWithValue("@taksit", int.Parse(DropDownList1.SelectedValue));
             SqlDataAdapter da = new SqlDataAdapter();
             da.SelectCommand = odeme;
             DataTable OdemeTBL = new DataTable();
@@ -73,11 +73,25 @@ namespace TahsilatUyg_
                 decimal kalan = toplam - odenen;
                
 
-                if(odenen <=toplam && odenen != (decimal)row["odenen"])
+                if(odenen <=toplam )
                 {
-                    SqlCommand odenenTaksit = new SqlCommand("INSERT INTO TBL_ODENEN_TAKSITLER(taksit_id, odenen_miktar, tarih)VALUES(@taksitid, @odenen, GETDATE())", con);
+                    SqlCommand cmd3 = new SqlCommand("SELECT[taksit_tutar] FROM[UrunTahsilat].[dbo].[TBL_TAKSIT_TARIH] WHERE taksit_id = @id", con);
+                    cmd3.Parameters.AddWithValue("@id", int.Parse(DropDownList1.SelectedValue));
+                    decimal tutar = (decimal)cmd3.ExecuteScalar();
+                    con.Close();
+
+                    con.Open();
+
+                    decimal eksik = 0;
+
+                    if (yeniodenen < tutar)
+                        eksik = tutar - yeniodenen;
+
+                    SqlCommand odenenTaksit = new SqlCommand("INSERT INTO TBL_ODENEN_TAKSITLER(taksit_id, odenen_miktar, tarih, eksik_miktar)VALUES(@taksitid, @odenen, GETDATE(),@eksik)", con);
                     odenenTaksit.Parameters.AddWithValue("@taksitid", int.Parse(DropDownList1.SelectedValue));
                     odenenTaksit.Parameters.AddWithValue("@odenen", yeniodenen);
+                    odenenTaksit.Parameters.AddWithValue("@eksik", eksik);
+
                     odenenTaksit.ExecuteNonQuery();
                     con.Close();
 
@@ -120,7 +134,7 @@ namespace TahsilatUyg_
             DropDownList1.DataBind();
 
 
-            SqlCommand cmd = new SqlCommand("SELECT [AD SOYAD],[Ürün Adı],[Alış Tarihi],[Kalan Tutar],[Aylık Taksit Tutarı]FROM TARIH_BILGI WHERE [musteri_id]= @musteri_id", con);
+            SqlCommand cmd = new SqlCommand("SELECT DISTINCT([AD SOYAD]),[Ürün Adı],[Alış Tarihi],[Kalan Tutar],[Aylık Taksit Tutarı]FROM TARIH_BILGI WHERE [musteri_id]= @musteri_id", con);
             cmd.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
 
             SqlDataReader reader = cmd.ExecuteReader();
@@ -164,7 +178,7 @@ namespace TahsilatUyg_
                     if (deger != null && deger != DBNull.Value)
                     {
                         decimal maxAlinmakIstenen = (decimal)deger;
-                        RangeValidator1.MinimumValue = 1.ToString();
+                        RangeValidator1.MinimumValue = "1";
                         RangeValidator1.MaximumValue = maxAlinmakIstenen.ToString();
                     TextBox3.Text = maxAlinmakIstenen.ToString();
                     }

@@ -259,8 +259,11 @@ namespace TahsilatUyg_.Classes
             SqlDataAdapter da = new SqlDataAdapter();
             DataSet ds = new DataSet();
             con.Open();
-            SqlCommand cmd2 = new SqlCommand("SELECT [ad_soyad] 'Ad Soyad',[urun_ad] 'Satılan Ürün Adı',[odenen_miktar] 'Ödenen Tutar',[tarih] 'Tarih',[Eksik Tutar] FROM SATIS_TUTANAGI WHERE musteri_id like @veri + '%' or ad_soyad like @veri + '%'", con);
+            SqlCommand cmd2 = new SqlCommand();
+            cmd2.CommandText = "SELECT\r\n    m.ad_soyad as 'Ad Soyad',\r\n    u.urun_ad as 'Satılan Ürün Adı',\r\n    ot.odenen_miktar as 'Ödenen Tutar',\r\n    ot.tarih as 'Tarih',\r\n    ot.eksik_miktar as 'Eksik Tutar'\r\nFROM\r\n    dbo.TBL_MUSTERI m\r\nINNER JOIN\r\n    dbo.TBL_TAKSITLER t ON m.musteri_id = t.musteri_id\r\nINNER JOIN\r\n    dbo.TBL_ODENEN_TAKSITLER ot ON t.taksit_id = ot.taksit_id\r\nINNER JOIN\r\n    dbo.TBL_URUNLER u ON t.urun_id = u.urun_id\r\nWHERE\r\n    m.musteri_id like @veri + '%' or ad_soyad like @veri + '%'";
+            cmd2.Connection = con;
             cmd2.Parameters.AddWithValue("@veri", veri);
+
             da.SelectCommand = cmd2;
             da.Fill(ds, "Odeme Tablosu");
             for (int i = 0; i < ds.Tables["Odeme Tablosu"].Rows.Count; i++)
