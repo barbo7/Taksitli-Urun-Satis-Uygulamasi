@@ -45,9 +45,12 @@ namespace TahsilatUyg_
         double aylikTutar = default;
         protected void TextBox3_TextChanged(object sender, EventArgs e)
         {
-            aylikTutar = double.Parse(TextBox2.Text) / double.Parse(TextBox3.Text);
-            TextBox4.Text = aylikTutar + "";
-            TextBox5.Text = aylikTutar + "";
+            if(TextBox3.Text !="")
+            {
+                aylikTutar = double.Parse(TextBox2.Text) / double.Parse(TextBox3.Text);
+                TextBox4.Text = aylikTutar + "";
+                TextBox5.Text = aylikTutar + "";
+            }
         }
 
         protected void TextBox4_TextChanged(object sender, EventArgs e)

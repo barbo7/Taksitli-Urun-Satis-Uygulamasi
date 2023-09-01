@@ -39,38 +39,7 @@
         <div class="container-fluid">
             <div class="header-wrap justify-content-end">
                 <div class="header-button">
-                    <div class="noti-wrap">
-                        <div class="noti__item js-item-menu">
-                            <i class="zmdi zmdi-notifications"></i>
-                            <span class="quantity">1</span>
-                            <div class="notifi-dropdown js-dropdown">
-                                <div class="notifi__title">
-                                    <p>1 Yeni Bildirim</p>
-                                </div>
-                               <%-- <div class="notifi__item">
-                                    <div class="bg-c1 img-cir img-40">
-                                        <i class="zmdi zmdi-email-open"></i>
-                                    </div>
-                                    <div class="content">
-                                        <p>Ödeme alındı</p>
-                                        <span class="date">Aug 12, 2023 12:50</span>
-                                    </div>
-                                </div>--%>
-                                <div class="notifi__item">
-                                    <div class="bg-c3 img-cir img-40">
-                                        <i class="zmdi zmdi-file-text"></i>
-                                    </div>
-                                    <div class="content">
-                                        <p>Ödeme alındı</p>
-                                        <span class="date">Aug 12, 2023 12:50</span>
-                                    </div>
-                                </div>
-                                <div class="notifi__footer">
-                                    <a href="#">Tüm Bİldirimler</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div class="account-wrap">
                         <div class="account-item clearfix js-item-menu">
                             <div class="content">

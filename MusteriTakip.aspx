@@ -56,7 +56,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" runat="server" ContentPlaceHolderID="ContentPlaceHolder1">
-            <asp:Label ID="Label6" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Ödeme Sayfası"></asp:Label>
+    <asp:Label ID="Label6" runat="server" BackColor="#CCCCCC" BorderColor="White" Font-Bold="True" Font-Size="Larger" Text="Ödeme Sayfası"></asp:Label>
             <br />
     <br />
     <i class="fa fa-angle-double-down custom-icon" aria-hidden="true" id ="icon"></i>

@@ -28,6 +28,7 @@ namespace TahsilatUyg_
             RegularExpressionValidator2.ValidationExpression = @"^\d+(\.\d+)?$";
 
             RangeValidator1.ControlToValidate = TextBox3.ID;
+
             if (!IsPostBack) {
                 string tabloBaslangic = Vt.MusteriTakipBaslangic();
                 myLiteralControl.Text = tabloBaslangic;
@@ -55,27 +56,41 @@ namespace TahsilatUyg_
             SqlConnection con = new SqlConnection(connectionStringGenel);
             decimal toplam, odenen;
             con.Open();
-            SqlCommand odeme = new SqlCommand("SELECT toplam_fiyat,odenen FROM TBL_TAKSITLER WHERE musteri_id = @musteri_id", con);
+            SqlCommand odeme = new SqlCommand("SELECT toplam_fiyat,odenen,taksit_id FROM TBL_TAKSITLER WHERE musteri_id = @musteri_id", con);
             odeme.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
+            SqlDataAdapter da = new SqlDataAdapter();
+            da.SelectCommand = odeme;
+            DataTable OdemeTBL = new DataTable();
+            da.Fill(OdemeTBL);
 
-            SqlDataReader reader = odeme.ExecuteReader();
-            if (reader.Read())
+            if (OdemeTBL.Rows.Count > 0)
             {
-                toplam = reader.GetDecimal(0);
-                odenen = reader.GetDecimal(1);
-                odenen += decimal.Parse(TextBox3.Text);
-                if(odenen <=toplam)
+                DataRow row = OdemeTBL.Rows[0];
+                decimal yeniodenen = decimal.Parse(TextBox3.Text);
+                toplam = (decimal)row["toplam_fiyat"];
+                odenen = (decimal)row["odenen"];
+                odenen += yeniodenen;
+                decimal kalan = toplam - odenen;
+               
+
+                if(odenen <=toplam && odenen != (decimal)row["odenen"])
                 {
-                    reader.Close();
-                    SqlCommand cmd = new SqlCommand("Update TBL_TAKSITLER SET odenen = @odenen WHERE musteri_id = @musteri_id AND taksit_id= @taksit", con);
+                    SqlCommand odenenTaksit = new SqlCommand("INSERT INTO TBL_ODENEN_TAKSITLER(taksit_id, odenen_miktar, tarih)VALUES(@taksitid, @odenen, GETDATE())", con);
+                    odenenTaksit.Parameters.AddWithValue("@taksitid", int.Parse(DropDownList1.SelectedValue));
+                    odenenTaksit.Parameters.AddWithValue("@odenen", yeniodenen);
+                    odenenTaksit.ExecuteNonQuery();
+                    con.Close();
+
+                    con.Open();
+                    SqlCommand cmd = new SqlCommand("Update TBL_TAKSITLER SET odenen = @odenen,kalan = @kalan  WHERE musteri_id = @musteri_id AND taksit_id= @taksit", con);
                     cmd.Parameters.AddWithValue("@odenen", odenen);
                     cmd.Parameters.AddWithValue("@musteri_id", int.Parse(TextBox2.Text));
-                    cmd.Parameters.AddWithValue("@taksit", odenen);
+                    cmd.Parameters.AddWithValue("@taksit", int.Parse(DropDownList1.SelectedValue));
+                    cmd.Parameters.AddWithValue("@kalan", kalan);
 
                     cmd.ExecuteNonQuery();
+
                     successAlert.Style["display"] = "block";
-                    myLiteralControl.Text = "";
-                    Literal2.Text = "";
                     TextBox1.Text = "";
                     TextBox2.Text = "";
                     TextBox3.Text = ""; 
@@ -126,11 +141,9 @@ namespace TahsilatUyg_
             con.Close();
             FiyatGetir();
         }
-
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SqlConnection con = new SqlConnection(connectionStringGenel);
-            
+            FiyatGetir();
         }
         void FiyatGetir()
         {

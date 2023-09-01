@@ -241,7 +241,7 @@ namespace TahsilatUyg_.Classes
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Ödenen"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Toplam Kalan"].ToString());
                 htmlBuilder.AppendFormat("<td>{0}</td>", reader["Maksimum Taksit Miktarı"].ToString());
-                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Musteri Notu"].ToString());
+                htmlBuilder.AppendFormat("<td>{0}</td>", reader["Müşteri Notu"].ToString());
                 htmlBuilder.Append("</tr>");
             }
 
@@ -265,7 +265,7 @@ namespace TahsilatUyg_.Classes
             da.Fill(ds, "Odeme Tablosu");
             for (int i = 0; i < ds.Tables["Odeme Tablosu"].Rows.Count; i++)
             {
-                string tr = "<tr>";
+                
                 cmd2.Parameters.Clear();
                 ds.Tables["KirmiziMi"]?.Clear();
                 cmd2.CommandText = "SELECT eksik_miktar FROM TBL_ODENEN_TAKSITLER WHERE (taksit_id IN (SELECT taksit_id FROM TBL_TAKSITLER WHERE musteri_id IN (SELECT musteri_id FROM TBL_MUSTERI WHERE ad_soyad = @veri)) AND eksik_miktar IS NOT NULL)";
@@ -274,8 +274,9 @@ namespace TahsilatUyg_.Classes
 
                 da.Fill(ds, "KirmiziMi");
 
-                if (ds.Tables["KirmiziMi"].Rows.Count > 0)
-                    tr = "<tr style=\"color: red;\">";//Borcu varsasatırı kırmızıya boyaycaz
+                bool eksikTutarVar = !string.IsNullOrEmpty(ds.Tables["Odeme Tablosu"].Rows[i]["Eksik Tutar"]?.ToString());
+                string tr = eksikTutarVar ? "<tr style=\"background-color: red;\">" : "<tr>";
+
 
                 htmlBuilder.Append(tr);
                 htmlBuilder.AppendFormat("<td>{0}</td>", ds.Tables["Odeme Tablosu"].Rows[i]["Ad Soyad"]?.ToString());
