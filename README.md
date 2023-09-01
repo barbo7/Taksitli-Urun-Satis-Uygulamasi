@@ -183,45 +183,6 @@ FROM            [UrunTahsilat].[dbo].[TBL_ODENEN_TAKSITLER] ot INNER JOIN
                          TBL_URUNLER u ON t .urun_id = u.urun_id INNER JOIN
                          TBL_MUSTERI m ON m.musteri_id = t .musteri_id
 
-
-CREATE TRIGGER GECIKENTAKSITTUTAR ON TBL_ODENEN_TAKSITLER
-AFTER INSERT AS
-BEGIN
-    DECLARE @EksikMiktar DECIMAL(18, 2), @ilkTarih DATE, @odenen DECIMAL(18, 2), @aylikTutar DECIMAL(18, 2), @Aylar INT, @Toplam DECIMAL(18, 2);
-	declare @odenen_id int
-    -- En son eklenen kaydın verilerini al
-    SELECT @odenen_id= i.odenen_id,@odenen = t.odenen, @ilkTarih = tt.eklenme_tarihi, @aylikTutar = tt.taksit_tutar, @Toplam = t.toplam_fiyat
-    FROM TBL_TAKSITLER t
-    INNER JOIN TBL_TAKSIT_TARIH tt ON tt.taksit_id = t.taksit_id
-	INNER JOIN inserted i on i.taksit_id=t.taksit_id
-
-    SET @Aylar = CEILING(@odenen / @aylikTutar);
-
-    IF @Aylar > 0 AND  @odenen < @aylikTutar
-    BEGIN
-        SET @ilkTarih = DATEADD(MONTH, @Aylar, @ilkTarih);
-        SET @EksikMiktar = @aylikTutar - (@odenen % @aylikTutar);
-    END
-    ELSE
-    BEGIN
-        SET @EksikMiktar = NULL;
-    END;
-	declare @varmi int;
-
-	SELECT @varmi=COUNT(*) FROM TBL_TAKSITLER WHERE musteri_id in(select musteri_id 
-	FROM TBL_ODENEN_TAKSITLER ot INNER JOIN inserted i on ot.odenen_id=i.odenen_id)
-
-    -- Güncellenen satırın eksik miktarını güncelle
-	if @varmi >0
-	begin
-
-    UPDATE TBL_ODENEN_TAKSITLER
-    SET eksik_miktar = @EksikMiktar
-    WHERE odenen_id=@odenen_id;
-	end
-	
-END;
-
 CREATE TRIGGER [dbo].[KALANUPDATE] on [dbo].[TBL_TAKSITLER] AFTER UPDATE AS
 DECLARE @topf decimal(18,2),@odenen decimal(18,2),@kalan decimal(18,2),@taksit_id int;
 select @taksit_id=taksit_id,@topf = toplam_fiyat,@odenen=odenen FROM inserted;
