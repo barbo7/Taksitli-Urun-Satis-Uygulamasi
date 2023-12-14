@@ -1493,8 +1493,6 @@ section {
 }
 
 .account-dropdown .info .content .name {
-    line-height: -webkit-calc(20/16);
-    line-height: -moz-calc(20/16);
     line-height: calc(20/16);
 }
 
@@ -1511,8 +1509,6 @@ section {
 .account-dropdown .info .content .email {
     font-size: 13px;
     color: #999;
-    line-height: -webkit-calc(20/13);
-    line-height: -moz-calc(20/13);
     line-height: calc(20/13);
 }
 
@@ -1619,8 +1615,6 @@ section {
 
 .menu-sidebar__content {
     position: relative;
-    height: -webkit-calc(100vh - 75px);
-    height: -moz-calc(100vh - 75px);
     height: calc(100vh - 75px);
 }
 
@@ -1909,8 +1903,6 @@ section {
 }
 
 .mess__title p, .email__title p, .notifi__title p {
-    line-height: -webkit-calc(29/14);
-    line-height: -moz-calc(29/14);
     line-height: calc(29/14);
     font-size: 14px;
     color: #808080;
@@ -1958,8 +1950,6 @@ section {
 }
 
 .mess__item .content {
-    width: -webkit-calc(100% - 55px);
-    width: -moz-calc(100% - 55px);
     width: calc(100% - 55px);
     text-align: left;
 }
@@ -1973,8 +1963,6 @@ section {
 .mess__item .content p {
     font-size: 14px;
     color: #555;
-    line-height: -webkit-calc(24/14);
-    line-height: -moz-calc(24/14);
     line-height: calc(24/14);
     margin-bottom: 4px;
 }
@@ -2013,8 +2001,6 @@ section {
 }
 
 .email__item .content {
-    width: -webkit-calc(100% - 55px);
-    width: -moz-calc(100% - 55px);
     width: calc(100% - 55px);
     text-align: left;
     font-size: 14px;
@@ -2079,8 +2065,6 @@ section {
 }
 
 .notifi__item .content {
-    width: -webkit-calc(100% - 55px);
-    width: -moz-calc(100% - 55px);
     width: calc(100% - 55px);
     text-align: left;
     font-size: 14px;
@@ -2205,8 +2189,6 @@ section {
 }
 
 .menu-sidebar2__content {
-    height: -webkit-calc(100vh - 75px);
-    height: -moz-calc(100vh - 75px);
     height: calc(100vh - 75px);
     border-right: 1px solid #e5e5e5;
     position: relative;
@@ -2537,8 +2519,6 @@ section {
     -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
-    height: -webkit-calc(100vh - 75px);
-    height: -moz-calc(100vh - 75px);
     height: calc(100vh - 75px);
     -webkit-transition: all .5s ease;
     -o-transition: all .5s ease;
@@ -3117,7 +3097,6 @@ section {
 
     .overview-wrap .button {
         -webkit-box-ordinal-group: 2;
-        -webkit-order: 1;
         -moz-box-ordinal-group: 2;
         -ms-flex-order: 1;
         order: 1;
@@ -3125,7 +3104,6 @@ section {
 
     .overview-wrap h2 {
         -webkit-box-ordinal-group: 3;
-        -webkit-order: 2;
         -moz-box-ordinal-group: 3;
         -ms-flex-order: 2;
         order: 2;
@@ -3154,25 +3132,21 @@ section {
 .overview-item--c1 {
     background-image: -moz-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
     background-image: -webkit-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -ms-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
 }
 
 .overview-item--c2 {
     background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
     background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
-    background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
 }
 
 .overview-item--c3 {
     background-image: -moz-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
     background-image: -webkit-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
-    background-image: -ms-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
 }
 
 .overview-item--c4 {
     background-image: -moz-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
     background-image: -webkit-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
-    background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
 }
 
 .overview-box .icon {
@@ -3304,7 +3278,6 @@ section {
 .au-card--bg-blue {
     background-image: -moz-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
     background-image: -webkit-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
-    background-image: -ms-linear-gradient(90deg, #396afc 0%, #2948ff 100%);
 }
 
 .au-card-top-countries {
@@ -3328,9 +3301,6 @@ section {
     padding: 40px;
     padding-top: 45px;
     padding-bottom: 47px;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -3777,7 +3747,6 @@ section {
 }
 
 .recei-mess__inner .avatar--tiny {
-    -webkit-align-self: flex-end;
     -ms-flex-item-align: end;
     align-self: flex-end;
     justify-self: flex-start;
@@ -3785,8 +3754,6 @@ section {
 }
 
 .recei-mess-list {
-    width: -webkit-calc(100% - 42px);
-    width: -moz-calc(100% - 42px);
     width: calc(100% - 42px);
 }
 
@@ -3921,7 +3888,6 @@ section {
 }
 
 .recent-report2 .chart-info__left {
-    -webkit-align-self: flex-end;
     -ms-flex-item-align: end;
     align-self: flex-end;
     margin-bottom: -5px;
@@ -3929,7 +3895,6 @@ section {
 
 @media (min-width: 992px) and (max-width: 1519px) {
     .recent-report2 .chart-info__left {
-        -webkit-align-self: auto;
         -ms-flex-item-align: auto;
         align-self: auto;
         margin-bottom: 30px;
@@ -3939,7 +3904,6 @@ section {
 
 @media (max-width: 991px) {
     .recent-report2 .chart-info__left {
-        -webkit-align-self: auto;
         -ms-flex-item-align: auto;
         align-self: auto;
         margin-bottom: 30px;
@@ -4748,8 +4712,6 @@ section {
 .copyright p {
     font-size: 14px;
     color: #666;
-    line-height: -webkit-calc(24/14);
-    line-height: -moz-calc(24/14);
     line-height: calc(24/14);
 }
 
@@ -4816,7 +4778,6 @@ section {
 
     .au-breadcrumb-content .au-breadcrumb-left {
         -webkit-box-ordinal-group: 3;
-        -webkit-order: 2;
         -moz-box-ordinal-group: 3;
         -ms-flex-order: 2;
         order: 2;
@@ -4913,8 +4874,6 @@ section {
 }
 
 .welcome2-inner .welcome2-greeting {
-    width: -webkit-calc(100% - 500px);
-    width: -moz-calc(100% - 500px);
     width: calc(100% - 500px);
 }
 
@@ -4944,7 +4903,6 @@ section {
     .welcome2-inner form {
         margin-bottom: 30px;
         margin-top: 30px;
-        -webkit-align-self: flex-start;
         -ms-flex-item-align: start;
         align-self: flex-start;
     }
