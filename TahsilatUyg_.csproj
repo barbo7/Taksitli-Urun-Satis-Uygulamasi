@@ -42,10 +42,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -90,6 +98,21 @@
       <DependentUpon>AnaSayfa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\Class.cs" />
+    <Compile Include="DBModel\MUSTERI_TAKSIT_BILGILERI.cs" />
+    <Compile Include="DBModel\MUSTERI_TAKSIT_BILGILERI2.cs" />
+    <Compile Include="DBModel\SATIS_TUTANAGI.cs" />
+    <Compile Include="DBModel\sysdiagram.cs" />
+    <Compile Include="DBModel\TAKSIT_DOKUMENTE.cs" />
+    <Compile Include="DBModel\TARIH_BILGI.cs" />
+    <Compile Include="DBModel\TBL_KEFIL.cs" />
+    <Compile Include="DBModel\TBL_MUSTERI.cs" />
+    <Compile Include="DBModel\TBL_ODEME_TAMAMLANAN.cs" />
+    <Compile Include="DBModel\TBL_ODENEN_TAKSITLER.cs" />
+    <Compile Include="DBModel\TBL_TAKSITLER.cs" />
+    <Compile Include="DBModel\TBL_TAKSIT_TARIH.cs" />
+    <Compile Include="DBModel\TBL_URUNLER.cs" />
+    <Compile Include="DBModel\UrunTahsilatDB.cs" />
+    <Compile Include="DBModel\URUN_TAKSIT.cs" />
     <Compile Include="KefilBilgi.aspx.cs">
       <DependentUpon>KefilBilgi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
