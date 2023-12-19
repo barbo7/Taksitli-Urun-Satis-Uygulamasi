@@ -78,6 +78,7 @@
     <Content Include="css\font-face.css" />
     <Content Include="css\Taksit.png" />
     <Content Include="css\theme.css" />
+    <Content Include="ExamplePage.aspx" />
     <Content Include="js\bootstrap-datetimepicker.js" />
     <Content Include="js\main.js" />
     <Content Include="js\moment.js" />
@@ -99,6 +100,10 @@
       <DependentUpon>AnaSayfa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Classes\Class.cs" />
+    <Compile Include="ExamplePage.aspx.cs">
+      <DependentUpon>ExamplePage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="KefilBilgi.aspx.cs">
       <DependentUpon>KefilBilgi.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
