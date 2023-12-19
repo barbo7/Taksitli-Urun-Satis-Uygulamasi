@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace TahsilatUyg_.DBModel
 {
-    public partial class UrunTahsilatDB : DbContext
+    public partial class UrunTahsilatDBContext : DbContext
     {
-        public UrunTahsilatDB()
-            : base("name=UrunTahsilatDBConnectionString")
+        public UrunTahsilatDBContext()
+            : base("name=UrunTahsilatConnectionString")
         {
         }
 
